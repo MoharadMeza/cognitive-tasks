@@ -1,0 +1,17 @@
+
+.feedback{
+    font-size: xx-large;
+}
+.feedback , .start-text{
+    font-family: 'Shabnam';
+}
+@media (max-width : 767px) {
+    .stars{
+        width: 50%;
+    }  
+}
+@media (min-width : 768px){
+.stars{
+    width: 30%;
+}
+}
