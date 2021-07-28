@@ -8,18 +8,19 @@ import Game from '../../_metronic/layout/components/challenges/Game/game.compone
 
 export const GamePage = (props) => {
   useEffect(()=>{
-    console.log("Game page mount");
-  })
+    console.log("GamePage USE EFFECT");
+  },[])
   const suhbeader = useSubheader();
   suhbeader.setTitle(props.gameName);
+  console.log("GamePage rendered",props.scoreAvailable);
   return (
     <>
       {/* begin::Dashboard */}
       {!props.scoreAvailable ?
         <Game setStartGame={props.setStartGame} startGame={props.startGame} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable}
           setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting} 
-          setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} CPT_defaultArr = {props.CPT_defaultArr}/>
-        : <Score scoreTable={props.scoreTable} scoreAvailable={props.scoreAvailable} setStartGame={props.setStartGame} setScoreAvailable={props.setScoreAvailable}/>
+          setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} />
+        : <Score scoreTable={props.scoreTable} setScoreTable={props.setScoreTable} setStartGame={props.setStartGame} setScoreAvailable={props.setScoreAvailable}/>
       }
       {/* end::Dashboard */}
     </>

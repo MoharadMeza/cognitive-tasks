@@ -1,18 +1,35 @@
-import React , {useEffect} from 'react'
+import React, { useEffect } from 'react'
 import { Link } from "react-router-dom";
 import './score.css'
 const Scores = (props) => {
-    useEffect(()=>{
+    useEffect(() => {
+        console.log("Score USE EFFECT");
         props.setStartGame(false);
-    })
-    console.log(props.scoreTable);
+        return()=>{
+            console.log("Score Unmount");
+        }
+    } ,[])
+    console.log("Score renderd");
+    const handleClick = () => {
+        props.setScoreAvailable(false)
+    }
     return (
         <div className="container score" dir="ltr">
             <div className="row justify-content-center">
                 <div className="col col-12">
                     <table className="table table-hover">
                         <tbody>
-                            <tr>
+                            {
+                                props.scoreTable.map((item)=>{
+                                    return(
+                                        <tr>
+                                            <td>{item.value}</td>
+                                            <td>{item.name}</td>
+                                        </tr>
+                                    )
+                                })
+                            }
+                            {/* <tr>
                                 <td>{props.scoreTable.time}</td>
                                 <td>زمان نمایش</td>
                             </tr>
@@ -59,15 +76,19 @@ const Scores = (props) => {
                             <tr>
                                 <td>{props.scoreTable.responseAvg}</td>
                                 <td>میانگین زمان پاسخ</td>
-                            </tr>
+                            </tr> */}
                         </tbody>
                     </table >
                 </div>
             </div>
+
             <div className="row justify-content-center">
-                <Link to="/" className="text-center">
-                    <button className="btn btn-secondary mt-5" onClick={()=>{props.setScoreAvailable(false)}}>بازگشت به صفحه اصلی</button>
+                <Link to="/">
+                    <button className="btn btn-secondary mt-5" onClick={handleClick}>
+                        بازگشت به صفحه اصلی
+                    </button>
                 </Link>
+
             </div>
         </div>
     )

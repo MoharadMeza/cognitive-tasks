@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import React, { Suspense, lazy ,useEffect } from "react";
 import { Redirect, Switch, Route } from "react-router-dom";
 import { LayoutSplashScreen, ContentRoute } from "../_metronic/layout";
 import { BuilderPage } from "./pages/BuilderPage";
@@ -22,10 +22,10 @@ const UserProfilepage = lazy(() =>
 );
 
 export default function BasePage(props) {
-  console.log(props.CPTModalSetting);
-  // useEffect(() => {
-  //   console.log('Base page');
-  // }, []) // [] - is required if you need only one call
+  console.log("BasePage rendered" , props.scoreAvailable);
+  useEffect(() => {
+    console.log('BasePage USE EFFECT');
+  }, []) // [] - is required if you need only one call
   // https://reactjs.org/docs/hooks-reference.html#useeffect
   return (
     <Suspense fallback={<LayoutSplashScreen />}>
@@ -41,14 +41,14 @@ export default function BasePage(props) {
            setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting}
            setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} gameName={"CPT"}
            setScoreTable={props.setScoreTable} scoreTable={props.scoreTable} setScoreAvailable={props.setScoreAvailable} scoreAvailable={props.scoreAvailable}
-           CPT_defaultArr = {props.CPT_defaultArr}/>
+           />
         </ContentRoute>
         <ContentRoute path="/NBack">
           <GamePage setStartGame={props.setStartGame} startGame={props.startGame}
            setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting}
            setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} gameName={"NBack"}
            setScoreTable={props.setScoreTable} scoreTable={props.scoreTable} setScoreAvailable={props.setScoreAvailable} scoreAvailable={props.scoreAvailable}
-           CPT_defaultArr = {props.CPT_defaultArr}/>
+           />
         </ContentRoute>
         <ContentRoute path="/builder" component={BuilderPage} />
         <ContentRoute path="/my-page" component={MyPage} />

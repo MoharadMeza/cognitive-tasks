@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo , useEffect } from "react";
 import objectPath from "object-path";
 // LayoutContext
 import { useHtmlClassService } from "../_core/MetronicLayout";
@@ -18,7 +18,10 @@ import { StickyToolbar } from "./extras/StickyToolbar";
 import { AnimateLoading } from "../../_partials/controls";
 
 export function Layout({ children }) {
-  //console.log(children.props.startGame);
+  useEffect(()=>{
+    console.log("Layout USE EFFECT");
+  } , [])
+  console.log("Layout renderd");
   const uiService = useHtmlClassService();
   // Layout settings (cssClasses/cssAttributes)
   const layoutProps = useMemo(() => {

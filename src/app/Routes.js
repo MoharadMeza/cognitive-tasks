@@ -18,11 +18,13 @@ export function Routes() {
     let index , target;
     let NBack_defaultArr = [];
     useEffect(()=>{
+        console.log("Route USE EFFECT");
         initArr();
     },[])
-
-    const [scoreTable, setScoreTable] = useState({})
+    
+    const [scoreTable, setScoreTable] = useState([])
     const [scoreAvailable, setScoreAvailable] = useState(false);
+    console.log("Route renderd" , scoreAvailable);
     const [startGame, setStartGame] = useState(false);
     const [NBackModalSetting , setNBackModalSetting] = useState({
         time: 3000,
@@ -41,18 +43,16 @@ export function Routes() {
         arr: [],
         mode: 0
     });
-    console.log("Route");
     const initArr = ()=>{
         const generateArray = new Generate(100 , 25);
         generateArray
         .cpt([1, 2], [0])
         .then((cptOut) => {
-            console.log("success");
+            setCPTModalSetting({...CPTModalSetting , arr : cptOut})
         })
         .catch((err) => {
             console.log(err);
         });
-        setCPTModalSetting({...CPTModalSetting , arr : generateArray.outSamples})
     }
     const { isAuthorized } = useSelector(
         ({ auth }) => ({

@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import Scores from '../Scores/Scores.component'
 import './cpt.css'
 
 import eStar from '../../../../../images/CPT/empty-star.png'
@@ -14,19 +13,34 @@ const CPT = (props) => {
     let arrOfImg, response = [];
     let cnt = 0;
 
-    let scoreObj = {
-        name: "CPT",
-        time: 3000,
-        isi: 1000,
-        target: [],
-        totalNumber: 0,
-        allCorrects: 0,
-        userCorrects: 0,
-        commission: 0,
-        ommission: 0,
-        totalResponseTime: 0,
-        responseAvg: 0,
-    };
+    let scoreObj = [
+        {name : "زمان نمایش" , value : 3000}, //0
+        {name : "ISI" , value : 1000}, //1
+        {name : "هدف" , value : []}, //2
+        {name : "تعداد شکل ها" , value : 0}, //3
+        {name : "کل صحیح ها" , value : 0}, //4
+        {name : "صحیح های کاربر" , value : 0}, //5
+        {name : "خطای حذف" , value : 0}, //6
+        {name : "خطای ارتکاب" , value : 0}, //7
+        {name : "زمان پاسخ کل" , value : 0}, //8
+        {name : "میانگین زمان پاسخ" , value : 0}, //9
+        {name : "بازداری صحیح" , value : 0}
+    ]
+    useEffect(() => {
+        //console.log(props.CPT_obj);
+        scoreObj[0].value = time = props.CPT_obj.time
+        scoreObj[1].value = isi = props.CPT_obj.isi
+        scoreObj[2].value = target = props.CPT_obj.targets
+        if (props.CPT_obj.arr.length)
+            arrOfImg = props.CPT_obj.arr;
+        window.addEventListener('keydown', eventHandler);
+        console.log("CPT USE EFFECT");
+        return () => {
+            console.log("CPT Unmount");
+            window.removeEventListener('keydown', eventHandler)
+        }
+    }, []);
+    console.log("CPT renderd");
     const eventHandler = (event) => {
         if ((!event || event.keyCode === 32) && !begin.current) {
             begin.current = 1;
@@ -40,19 +54,7 @@ const CPT = (props) => {
                 checkAnswer();
             }
     }
-    useEffect(() => {
-        //console.log(props.CPT_obj);
-        scoreObj.time = time = props.CPT_obj.time
-        scoreObj.isi = isi = props.CPT_obj.isi
-        scoreObj.target = target = props.CPT_obj.targets
-        if (props.CPT_obj.arr.length)
-            arrOfImg = props.CPT_obj.arr;
-        window.addEventListener('keydown', eventHandler);
-        console.log(scoreObj.target);
-        return () => {
-            window.removeEventListener('keydown', eventHandler)
-        }
-    }, []);
+    
 
     function triggerEvent(el, type, keyCode) {
         if ('createEvent' in document) {
@@ -77,6 +79,7 @@ const CPT = (props) => {
             //debugger;
             clearInterval(intervalT)
             clearTimeout(normalISI)
+            return;
         }
         intervalT = setInterval(() => {
             status.current = 1;
@@ -85,13 +88,13 @@ const CPT = (props) => {
     }
 
     const setScoreObjectInfo = () => {
-        scoreObj.totalNumber = arrOfImg.length;
-        for (let i = 0; i < scoreObj.totalNumber; i++) {
+        scoreObj[3].value = arrOfImg.length;
+        for (let i = 0; i < scoreObj[3].value; i++) {
             if (arrOfImg[i].targetSample) {
-                scoreObj.allCorrects++;
+                scoreObj[4].value++;
             }
         }
-        scoreObj.ommission = scoreObj.allCorrects;
+        scoreObj[6].value = scoreObj[3].value;
     }
     const start = () => {
         setScoreObjectInfo();
@@ -100,13 +103,17 @@ const CPT = (props) => {
         handleInterval(finish);
     }
     const showTime = () => {
-        setFeedBack(null)
-        if(finish){
+        if (cnt === arrOfImg.length) {
+            clearInterval(intervalT);
+            //debugger;
+            console.log("fin");
+            finish = 1;
+            scoreObj[10].value = scoreObj[3].value - scoreObj[4].value -scoreObj[7].value
             props.setScoreTable(scoreObj)
             props.setScoreAvailable(true);
             return;
         }
-        //debugger;
+        setFeedBack(null)
         if (arrOfImg[cnt].imageIndex === 0)
             setImg(fStar)
         else if (arrOfImg[cnt].imageIndex === 1)
@@ -114,15 +121,8 @@ const CPT = (props) => {
         else if (arrOfImg[cnt].imageIndex === 2)
             setImg(eStar)
         blockStartTimer = Date.now();
-        console.log(cnt , arrOfImg.length);
         
-        if (cnt === arrOfImg.length - 1) {
-            debugger;
-            clearInterval(intervalT);
-            console.log(intervalT);
-            console.log("fin");
-            finish = 1;
-        }
+        
         normalISI = setTimeout(() => { setImg(null) }, time);
         cnt++;
     }
@@ -133,32 +133,31 @@ const CPT = (props) => {
             answerTime = pressKey - blockStartTimer;
             indexNum = cnt - 1;
             if (arrOfImg[indexNum].targetSample) {
-                console.log("true");
-                scoreObj.userCorrects++;
-                scoreObj.ommission--;
+                //console.log("true");
+                scoreObj[5].value++;
+                scoreObj[6].value--;
                 response.push(answerTime);
                 sum += answerTime;
-                scoreObj.totalResponseTime = sum;
-                scoreObj.responseAvg = averaging();
+                scoreObj[8].value = sum;
+                scoreObj[9].value = averaging();
                 setFeedBack("درست")
             }
             else{
-                console.log("false");
-                scoreObj.commission++;
+                //console.log("false");
+                scoreObj[7].value++;
                 setFeedBack("غلط")
             }
             if (answerTime <= time) {
                 clearTimeout(normalISI);
                 clearInterval(intervalT);
                 setImg(null)
-                setTimeout(() => {
+                normalISI = setTimeout(() => {
                     status.current = 1;
                     showTime();
                     handleInterval(finish);
                 }, isi)
             }
         }
-        console.log(response)
     }
     const averaging = () => {
         let avg = sum / response.length;

@@ -11,27 +11,15 @@ import fStar from '../../../../../images/CPT/star.png'
 
 const Game = (props) => {
     useEffect(() => {
-        console.log("USE EFFECT CALLED !");
+        console.log("GAME USE EFFECT !");
+        return ()=>{
+            console.log("GAME UNMOUNT !");
+        }
     }, [])
-    //console.log(props.CPTModalSetting);
+    console.log("Game renderd");
 
-    let CPT_obj = {
-        numbers: props.CPTModalSetting.numbers,
-        targetPercentage: props.CPTModalSetting.targetPercentage,
-        time: 3000,
-        isi: 1000,
-        targets: [],
-        arr: props.CPTModalSetting.arr,
-        mode: 0
-    }
-    let NBack_obj = {
-        time: 3000,
-        isi: 1000,
-        target: 1,
-        NumberOfStimuli: 0,
-        arr: [],
-        mode: 0
-    };
+    let CPT_obj = props.CPTModalSetting;
+    let NBack_obj = props.NBackModalSetting;
     const [showModal, setShowModal] = useState(false);
     const [startBtn, setStartBtn] = useState(0);
     const [mode, setMode] = useState(0);
@@ -42,24 +30,21 @@ const Game = (props) => {
     const handleShow = () => setShowModal(true);
     const handleClose = () => setShowModal(false);
     const startHandler = () => {
-        //currentRoute === "/NBack" ? setNBackObj(props.NBackModalSetting) : setCPTObj(props.CPTModalSetting);
         props.setStartGame(true);
         setStartBtn(1);
     }
     const setArray = (n, t) => {
         let totalTargets = [0, 1 ,2]
-        console.log(totalTargets.filter(item => !CPT_obj.targets.includes(item), CPT_obj.targets));
+        let none_target = totalTargets.filter(item => !CPT_obj.targets.includes(item))
         const generateArray = new Generate(n, t);
         generateArray
-            .cpt(totalTargets.filter(item => !CPT_obj.targets.includes(item)), CPT_obj.targets)
+            .cpt(none_target , CPT_obj.targets)
             .then((cptOut) => {
-                console.log("success");
+                CPT_obj.arr = cptOut;
             })
             .catch((err) => {
                 console.log(err);
             });
-        console.log(generateArray.outSamples);
-        return generateArray.outSamples;
     }
 
     const handleMode = (event) => {
@@ -73,7 +58,6 @@ const Game = (props) => {
         let target = [];
         event.preventDefault();
         if (currentRoute === "/NBack") {
-            debugger;
             NBack_obj = props.NBackModalSetting;
             if (parseInt(event.target[0].value) > 0)
                 NBack_obj.time = parseInt(event.target[0].value);
@@ -96,7 +80,7 @@ const Game = (props) => {
             props.setNBackModalSetting(NBack_obj);
         }
         else {
-            console.log(props.CPTModalSetting);
+            //console.log(props.CPTModalSetting);
             CPT_obj = props.CPTModalSetting;
             if (parseInt(event.target[0].value) > 0)
                 CPT_obj.time = parseInt(event.target[0].value);
@@ -113,7 +97,8 @@ const Game = (props) => {
             if (event.target[6].checked)
                 target.push(2);
             CPT_obj.targets = target;
-            CPT_obj.arr = setArray(CPT_obj.numbers, CPT_obj.targetPercentage)
+            //setArray(CPT_obj.numbers, CPT_obj.targetPercentage)
+            setArray(CPT_obj.numbers, CPT_obj.targetPercentage)
             CPT_obj.mode = mode;
 
             //setCPTObj(CPT_obj);
@@ -250,7 +235,7 @@ const Game = (props) => {
     else {
         if (currentRoute === "/NBack")
             return (
-                <NBack NBack_obj={NBackObj} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
+                <NBack NBack_obj={props.NBackModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
             )
         else
             return (
