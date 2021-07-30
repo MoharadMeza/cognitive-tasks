@@ -2,17 +2,31 @@ import React, { useEffect } from 'react'
 import { Link } from "react-router-dom";
 import './score.css'
 const Scores = (props) => {
+    let shapes = [
+        {value : 0 , name :  "ستاره توپر"},
+        {value : 1 , name : "ستاره نصفه"},
+        {value : 2 , name : "ستاره توخالی"},
+    ]
+
     useEffect(() => {
         console.log("Score USE EFFECT");
         props.setStartGame(false);
-        return()=>{
+        return () => {
             console.log("Score Unmount");
         }
-    } ,[])
-    console.log("Score renderd");
+    }, [])
     const handleClick = () => {
         props.setScoreAvailable(false)
     }
+    const convertTargets = (target) => {
+        let targetsName = []
+        let targets = shapes.filter((item) => target.includes(item.value))
+        targets.map((item) => targetsName.push(item.name))
+        console.log(targetsName);
+        return targetsName 
+    }
+
+
     return (
         <div className="container score" dir="ltr">
             <div className="row justify-content-center">
@@ -20,8 +34,16 @@ const Scores = (props) => {
                     <table className="table table-hover">
                         <tbody>
                             {
-                                props.scoreTable.map((item)=>{
-                                    return(
+                                props.scoreTable.map((item, index) => {
+                                    if (index === 2) {
+                                        return (
+                                            <tr>
+                                                <td>{convertTargets(item.value).join(" , ")}</td>
+                                                <td>{item.name}</td>
+                                            </tr>
+                                        )
+                                    }
+                                    return (
                                         <tr>
                                             <td>{item.value}</td>
                                             <td>{item.name}</td>
@@ -29,54 +51,6 @@ const Scores = (props) => {
                                     )
                                 })
                             }
-                            {/* <tr>
-                                <td>{props.scoreTable.time}</td>
-                                <td>زمان نمایش</td>
-                            </tr>
-                            <tr>
-                                <td>{props.scoreTable.isi}</td>
-                                <td>ISI</td>
-                            </tr>
-                            <tr>
-                                {props.scoreTable.n ? <td>{props.scoreTable.n}</td> : null}
-                                {props.scoreTable.target[0] === 0 && <td>ستاره توپر</td>}
-                                {props.scoreTable.target[0] === 1 && <td>ستاره نیمه پر</td>}
-                                {props.scoreTable.target[0] === 2 && <td>ستاره تو خالی</td>}
-                                {props.scoreTable.n ? <td>n</td> : <td>هدف</td>}
-                            </tr>
-                            <tr>
-                                <td>{props.scoreTable.totalNumber}</td>
-                                <td>کل اعداد</td>
-                            </tr>
-                            <tr>
-                                {(props.scoreTable.name === "CPT") ? <td>{props.scoreTable.totalNumber - props.scoreTable.allCorrects - props.scoreTable.commission}</td>
-                                    : null}
-                                {(props.scoreTable.name === "CPT") ? <td>بازداری صحیح</td> : null}
-                            </tr>
-                            <tr>
-                                <td>{props.scoreTable.allCorrects}</td>
-                                <td>مجموع صحیح ها</td>
-                            </tr>
-                            <tr>
-                                <td>{props.scoreTable.userCorrects}</td>
-                                <td>تعداد پاسخ صحیح</td>
-                            </tr>
-                            <tr>
-                                <td>{props.scoreTable.commission}</td>
-                                <td> خطای ارتکاب (Commission)</td>
-                            </tr>
-                            <tr>
-                                <td>{props.scoreTable.ommission}</td>
-                                <td>خطای حذف (Ommission)</td>
-                            </tr>
-                            <tr>
-                                <td>{props.scoreTable.totalResponseTime}</td>
-                                <td>زمان پاسخ صحیح</td>
-                            </tr>
-                            <tr>
-                                <td>{props.scoreTable.responseAvg}</td>
-                                <td>میانگین زمان پاسخ</td>
-                            </tr> */}
                         </tbody>
                     </table >
                 </div>
