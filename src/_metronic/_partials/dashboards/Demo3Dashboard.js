@@ -46,7 +46,6 @@ export function Demo3Dashboard() {
             <Card className="mx-10 h-100" theme={theme.typography}>
               <Link to="/NBack" className="active">
                 <CardHeader
-
                   dir="ltr"
                   avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>

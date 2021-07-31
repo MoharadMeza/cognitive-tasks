@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Link } from "react-router-dom";
+import { Link ,useLocation } from "react-router-dom";
 import './score.css'
 const Scores = (props) => {
     let shapes = [
@@ -7,7 +7,8 @@ const Scores = (props) => {
         {value : 1 , name : "ستاره نصفه"},
         {value : 2 , name : "ستاره توخالی"},
     ]
-
+    const { pathname } = useLocation();
+    const currentRoute = pathname;
     useEffect(() => {
         console.log("Score USE EFFECT");
         props.setStartGame(false);
@@ -35,7 +36,7 @@ const Scores = (props) => {
                         <tbody>
                             {
                                 props.scoreTable.map((item, index) => {
-                                    if (index === 2) {
+                                    if (currentRoute === "/CPT" && index === 2) {
                                         return (
                                             <tr>
                                                 <td>{convertTargets(item.value).join(" , ")}</td>

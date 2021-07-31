@@ -6,26 +6,33 @@ import hStar from '../../../../../../images/CPT/half-tiny-star.png'
 import fStar from '../../../../../../images/CPT/star.png'
 
 const CptModal = (props) => {
-    let status = 0;
-    let CPT_obj = props.CPTModalSetting;
+    let CPT_obj = props.CPTModalSetting , sw = 0;
     let target = [];
     const [mode, setMode] = useState(0);
-    const [error , setError] = useState("");
+    const [error, setError] = useState(false);
 
     const setArray = (n, t) => {
         let totalTargets = [0, 1, 2]
         let none_target = totalTargets.filter(item => !CPT_obj.targets.includes(item))
+        if(none_target.length === totalTargets.length || !none_target.length)
+        {
+            sw = 1;
+            setError(true)
+            return; 
+        }
         const generateArray = new Generate(n, t);
         generateArray
             .cpt(none_target, CPT_obj.targets)
             .then((cptOut) => {
+                //debugger;
                 CPT_obj.arr = cptOut;
+                setError(false);
             })
             .catch((err) => {
-                debugger;
-
-                setError(err)
-                status = 1
+                //debugger;
+                CPT_obj.e = err.message
+                sw = 0;
+                setError(true)
                 console.log(err);
             });
     }
@@ -37,7 +44,9 @@ const CptModal = (props) => {
     }
 
     const handleClose = () => props.setShowModal(false);
+
     const updateSetting = (event) => {
+        sw = 0;
         event.preventDefault();
         CPT_obj = props.CPTModalSetting;
         if (parseInt(event.target[0].value) > 0)
@@ -56,20 +65,22 @@ const CptModal = (props) => {
             target.push(2);
         CPT_obj.targets = target;
         setArray(CPT_obj.numbers, CPT_obj.targetPercentage)
+        console.log(CPT_obj.e);
         CPT_obj.mode = mode;
-        if(status)
-        {
-            console.log(error);
-            CPT_obj = {};
-            return;
+        //debugger;
+        console.log(CPT_obj);
+        if (sw) {
+            CPT_obj = props.CPTModalSetting;
         }
-        props.setCPTModalSetting(CPT_obj);
-        props.setShowModal(false);
+        else {
+            props.setCPTModalSetting(CPT_obj);
+            props.setShowModal(false);
+        }
     }
 
     return (
         <Modal show={props.showModal} onHide={handleClose} className="game-modal">
-            <form onSubmit={updateSetting}>
+            <form onSubmit={updateSetting} id="setting-form" >
                 <Modal.Header className="bg-light">
                     <Modal.Title className="w-100">
                         تنظیمات
@@ -112,21 +123,21 @@ const CptModal = (props) => {
                                     <div className="form-check form-check-inline col-2 p-0">
                                         <label className="checkbox checkbox-success ms-5">
                                             <img src={fStar} className="w-50 mt-3 mb-3 mr-2 ml-3" />
-                                            <input type="checkbox" name="RadioOptions1" defaultChecked={props.CPTModalSetting.targets.includes(0)}/>
+                                            <input type="checkbox" name="RadioOptions1" defaultChecked={props.CPTModalSetting.targets.includes(0)} />
                                             <span className="mt-2"></span>
                                         </label>
                                     </div>
                                     <div className="form-check form-check-inline col-2 p-0">
                                         <label className="checkbox checkbox-success ms-5">
                                             <img src={hStar} className="w-50 mt-3 mb-3 mr-2 ml-3" />
-                                            <input type="checkbox" name="RadioOptions1" defaultChecked={props.CPTModalSetting.targets.includes(1)}/>
+                                            <input type="checkbox" name="RadioOptions1" defaultChecked={props.CPTModalSetting.targets.includes(1)} />
                                             <span className="mt-2"></span>
                                         </label>
                                     </div>
                                     <div className="form-check form-check-inline col-2 p-0">
                                         <label className="checkbox checkbox-success ms-5">
                                             <img src={eStar} className="w-50 mt-3 mb-3 mr-2 ml-3" />
-                                            <input type="checkbox" name="RadioOptions1" defaultChecked={props.CPTModalSetting.targets.includes(2)}/>
+                                            <input type="checkbox" name="RadioOptions1" defaultChecked={props.CPTModalSetting.targets.includes(2)} />
                                             <span className="mt-2"></span>
                                         </label>
                                     </div>
@@ -150,11 +161,19 @@ const CptModal = (props) => {
                                 </label>
                             </div>
                         </div>
-                        {error ? error : null}
+                        {error ?
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert" dir="rtl">
+                                <strong>آرایه ای با مقادیر وارد شده ساخته نشد!</strong>
+                                {/* <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button> */}
+                            </div>
+                            : null}
+
                     </div>
                 </Modal.Body>
                 <Modal.Footer className="bg-light">
-                    <input className="btn btn-success" type="submit" value="ذخیره" />
+                    <input className="btn btn-success" disabled={error && false} type="submit" value="ذخیره" />
                 </Modal.Footer>
             </form>
         </Modal>

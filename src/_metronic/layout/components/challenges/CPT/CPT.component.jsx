@@ -94,7 +94,7 @@ const CPT = (props) => {
                 scoreObj[4].value++;
             }
         }
-        scoreObj[6].value = scoreObj[3].value;
+        scoreObj[6].value = scoreObj[4].value;
     }
     const start = () => {
         setScoreObjectInfo();
