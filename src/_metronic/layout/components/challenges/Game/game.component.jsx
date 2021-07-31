@@ -40,7 +40,7 @@ const Game = (props) => {
                         </button>
                     </div>
                 </div>
-                {currentRoute === '/CPT'  ? <CptModal showModal={showModal} setShowModal={setShowModal} setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} /> : null}
+                {currentRoute === '/CPT' ? <CptModal showModal={showModal} setShowModal={setShowModal} setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} /> : null}
             </div>
         )
     else {
