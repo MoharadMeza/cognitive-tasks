@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from 'react-router-dom'
 import CPT from '../CPT/CPT.component'
 import NBack from '../NBack/NBack.component'
-import CptModal from '../modals/CPT/CptModal.component'
+import CptModal from '../modals/CPT/CPTModal.component'
+import StroopModal from '../modals/StroopModal/StroopModal.component'
+import Stroop from '../Stroop/Stroop.component'
 import './game.css'
 const Game = (props) => {
     // useEffect(() => {
@@ -40,6 +42,10 @@ const Game = (props) => {
                         </button>
                     </div>
                 </div>
+                {currentRoute === '/Stroop' ?  <StroopModal showModal={showModal} setShowModal={setShowModal}
+                    setStroopModalSetting={props.setStroopModalSetting}
+                    stroopModalSetting={props.stroopModalSetting}
+                     /> : null}
                 {currentRoute === '/CPT' ? <CptModal showModal={showModal} setShowModal={setShowModal} setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} /> : null}
             </div>
         )
@@ -48,6 +54,12 @@ const Game = (props) => {
             return (
                 <CPT CPT_obj={props.CPTModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
             )
+            else if(currentRoute === "/Stroop")
+            {
+                return(
+                    <Stroop stroop_obj={props.stroopModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
+                )
+            }      
         else
             return (
                 <NBack NBack_obj={props.NBackModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />

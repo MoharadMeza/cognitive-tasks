@@ -89,11 +89,11 @@ export function AsideMenuList({ layoutProps }) {
           aria-haspopup="true"
           data-menu-toggle="hover"
         >
-          <NavLink className="menu-link menu-toggle" to="/dashborad/CPT">
+          <NavLink className="menu-link menu-toggle" to="/Stroop">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
             </span>
-            <span className="menu-text">CPT</span>
+            <span className="menu-text">Stroop</span>
           </NavLink>
         </li>
         {/* ////////////////////////////// */}
