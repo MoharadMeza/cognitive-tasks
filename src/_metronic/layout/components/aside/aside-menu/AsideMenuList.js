@@ -26,17 +26,17 @@ export function AsideMenuList({ layoutProps }) {
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Layers.svg")} />
             </span>
-            <span className="menu-text" style={{fontFamily:'Shabnam'}}>داشبورد</span>
+            <span className="menu-text" style={{ fontFamily: "Shabnam" }}>
+              داشبورد
+            </span>
           </NavLink>
         </li>
         {/*end::1 Level*/}
 
-
-
         {/* Components */}
         {/* begin::section */}
         <li className="menu-section ">
-          <h3 style={{ fontFamily: 'Shabnam' }}> آزمون ها</h3>
+          <h3 style={{ fontFamily: "Shabnam" }}> آزمون ها</h3>
           <i className="menu-icon flaticon-more-v2"></i>
         </li>
 
@@ -62,11 +62,22 @@ export function AsideMenuList({ layoutProps }) {
             <span className="menu-text">CPT</span>
           </NavLink>
         </li>
+        <li
+          className={`menu-item ${getMenuItemActive("/CPT", false)}`}
+          aria-haspopup="true"
+        >
+          <NavLink className="menu-link" to="/gonogo">
+            <span className="svg-icon menu-icon">
+              <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
+            </span>
+            <span className="menu-text">GO-NOGO</span>
+          </NavLink>
+        </li>
         {/* end:: section */}
 
         {/* Material-UI */}
         {/*begin::1 Level*/}
-        <li
+        {/* <li
           className={`menu-item menu-item-submenu ${getMenuItemActive(
             "/google-material",
             true
@@ -95,14 +106,11 @@ export function AsideMenuList({ layoutProps }) {
             </span>
             <span className="menu-text">CPT</span>
           </NavLink>
-        </li>
+        </li> */}
         {/* ////////////////////////////// */}
         {/* /////////////////////////////// */}
 
-
-
         {/*end::1 Level*/}
-
 
         {/*end::1 Level*/}
       </ul>

@@ -24,6 +24,7 @@ const UserProfilepage = lazy(() =>
 export default function BasePage(props) {
   console.log("BasePage rendered" , props.scoreAvailable);
   useEffect(() => {
+    console.log(props.gonogoModalSetting.arr);
     console.log('BasePage USE EFFECT');
   }, []) // [] - is required if you need only one call
   // https://reactjs.org/docs/hooks-reference.html#useeffect
@@ -47,6 +48,14 @@ export default function BasePage(props) {
           <GamePage setStartGame={props.setStartGame} startGame={props.startGame}
            setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting}
            setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} gameName={"NBack"}
+           setScoreTable={props.setScoreTable} scoreTable={props.scoreTable} setScoreAvailable={props.setScoreAvailable} scoreAvailable={props.scoreAvailable}
+           />
+        </ContentRoute>
+        <ContentRoute path="/gonogo">
+          <GamePage setStartGame={props.setStartGame} startGame={props.startGame}
+           setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting}
+           setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} gameName={"gonogo"}
+           setGonogoModalSetting={props.setGonogoModalSetting} gonogoModalSetting={props.gonogoModalSetting}
            setScoreTable={props.setScoreTable} scoreTable={props.scoreTable} setScoreAvailable={props.setScoreAvailable} scoreAvailable={props.scoreAvailable}
            />
         </ContentRoute>

@@ -35,14 +35,14 @@ const Scores = (props) => {
                         <tbody>
                             {
                                 props.scoreTable.map((item, index) => {
-                                    if (index === 2) {
-                                        return (
-                                            <tr>
-                                                <td>{convertTargets(item.value).join(" , ")}</td>
-                                                <td>{item.name}</td>
-                                            </tr>
-                                        )
-                                    }
+                                    // if (index === 2) {
+                                    //     return (
+                                    //         <tr>
+                                    //             <td>{convertTargets(item.value).join(" , ")}</td>
+                                    //             <td>{item.name}</td>
+                                    //         </tr>
+                                    //     )
+                                    // }
                                     return (
                                         <tr>
                                             <td>{item.value}</td>

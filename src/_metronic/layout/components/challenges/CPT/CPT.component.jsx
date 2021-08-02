@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import './cpt.css'
-
 import eStar from '../../../../../images/CPT/empty-star.png'
 import hStar from '../../../../../images/CPT/half-tiny-star.png'
 import fStar from '../../../../../images/CPT/star.png'

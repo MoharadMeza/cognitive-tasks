@@ -1,67 +1,76 @@
+import { Modal } from "react-bootstrap";
+import { Form } from "react-bootstrap";
 import React, { useState } from "react";
-import Modal from "react-bootstrap/Modal";
 import Generate from "../../../../../../app/Generate";
-import eStar from "../../../../../../images/CPT/empty-star.png";
-import hStar from "../../../../../../images/CPT/half-tiny-star.png";
-import fStar from "../../../../../../images/CPT/star.png";
-
-const CptModal = (props) => {
+const GonogoModal = (props) => {
+  console.log(props.gonogoModalSetting);
+  // debugger;
   let status = 0;
-  let CPT_obj = props.CPTModalSetting;
-  let target = [];
+  let gonogo_obj = props.gonogoModalSetting;
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
   const [mode, setMode] = useState(0);
   const [error, setError] = useState("");
-
+  let none_target = 0;
   const setArray = (n, t) => {
-    let totalTargets = [0, 1, 2];
+    let totalTargets = gonogo_obj.arr;
     let none_target = totalTargets.filter(
-      (item) => !CPT_obj.targets.includes(item)
+      (item) => !gonogo_obj.targets.includes(item)
     );
     const generateArray = new Generate(n, t);
     generateArray
-      .cpt(none_target, CPT_obj.targets)
-      .then((cptOut) => {
-        CPT_obj.arr = cptOut;
+      .gonogo(none_target, gonogo_obj.targets)
+      .then((gonogoOut) => {
+        console.log(gonogoOut);
+        gonogo_obj.arr = gonogoOut;
       })
       .catch((err) => {
-        debugger;
         setError(err);
         status = 1;
         console.log(err);
       });
   };
+
+  const updateSetting = (event) => {
+    event.preventDefault();
+    console.log(event.target[0]);
+    gonogo_obj = props.gonogoModalSetting;
+    console.log(event.target[0].value);
+    if (event.target[0].value) {
+      gonogo_obj.tempArraySample = event.target[0].value;
+      let tempGonogoArr = [];
+      tempGonogoArr = event.target[0].value.split("|");
+      gonogo_obj.arr = tempGonogoArr;
+      console.log(tempGonogoArr);
+    }
+    if (parseInt(event.target[1].value) > 0)
+      gonogo_obj.time = parseInt(event.target[1].value);
+    if (parseInt(event.target[2].value) >= 0)
+      gonogo_obj.isi = parseInt(event.target[2].value);
+    if (parseInt(event.target[3].value) >= 0)
+      gonogo_obj.numbers = parseInt(event.target[3].value);
+    if (parseInt(event.target[4].value) >= 0)
+      gonogo_obj.targetPercentage = parseInt(event.target[4].value);
+    if (event.target[5].value) {
+      let tempGonogoArrTarget = [];
+      tempGonogoArrTarget = event.target[5].value.split("|");
+      gonogo_obj.targets = tempGonogoArrTarget;
+    }
+    setArray(gonogo_obj.numbers, gonogo_obj.targetPercentage);
+    gonogo_obj.mode = mode;
+    if (status) {
+      console.log(error);
+      gonogo_obj = {};
+      return;
+    }
+    props.setGonogoModalSetting(gonogo_obj);
+    props.setShowModal(false);
+  };
+
   const handleMode = (event) => {
     if (event.target.id === "demo") setMode(0);
     else setMode(1);
   };
-
-  const handleClose = () => props.setShowModal(false);
-  const updateSetting = (event) => {
-    event.preventDefault();
-    CPT_obj = props.CPTModalSetting;
-    if (parseInt(event.target[0].value) > 0)
-      CPT_obj.time = parseInt(event.target[0].value);
-    if (parseInt(event.target[1].value) >= 0)
-      CPT_obj.isi = parseInt(event.target[1].value);
-    if (parseInt(event.target[2].value) >= 0)
-      CPT_obj.numbers = parseInt(event.target[2].value);
-    if (parseInt(event.target[3].value) >= 0)
-      CPT_obj.targetPercentage = parseInt(event.target[3].value);
-    if (event.target[4].checked) target.push(0);
-    if (event.target[5].checked) target.push(1);
-    if (event.target[6].checked) target.push(2);
-    CPT_obj.targets = target;
-    setArray(CPT_obj.numbers, CPT_obj.targetPercentage);
-    CPT_obj.mode = mode;
-    if (status) {
-      console.log(error);
-      CPT_obj = {};
-      return;
-    }
-    props.setCPTModalSetting(CPT_obj);
-    props.setShowModal(false);
-  };
-
   return (
     <Modal show={props.showModal} onHide={handleClose} className="game-modal">
       <form onSubmit={updateSetting}>
@@ -70,6 +79,23 @@ const CptModal = (props) => {
         </Modal.Header>
         <Modal.Body className="bg-light">
           <div className="container">
+            <div className="row form-group mb-2">
+              <label htmlFor="input0" className="col-auto col-form-label">
+                آرایه نمونه
+              </label>
+              <div className="col ps-0">
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlTextarea1"
+                >
+                  <Form.Control
+                    as="textarea"
+                    rows={4}
+                    defaultValue={props.gonogoModalSetting.tempArraySample}
+                  />
+                </Form.Group>
+              </div>
+            </div>
             <div className="row form-group mb-2">
               <label htmlFor="input1" className="col-auto col-form-label">
                 مدت زمان نمایش (ms) :
@@ -80,7 +106,7 @@ const CptModal = (props) => {
                   className="form-control"
                   id="input3"
                   min="20"
-                  placeholder={`پیشفرض : ${props.CPTModalSetting.time}`}
+                  defaultValue={props.gonogoModalSetting.time}
                 />
               </div>
             </div>
@@ -99,7 +125,7 @@ const CptModal = (props) => {
                   className="form-control"
                   id="input4"
                   min="20"
-                  placeholder={`پیشفرض : ${props.CPTModalSetting.isi}`}
+                  defaultValue={props.gonogoModalSetting.isi}
                 />
               </div>
             </div>
@@ -114,7 +140,7 @@ const CptModal = (props) => {
                   className="form-control"
                   id="input1"
                   min="5"
-                  placeholder={`پیشفرض : ${props.CPTModalSetting.numbers}`}
+                  defaultValue={props.gonogoModalSetting.numbers}
                 />
               </div>
             </div>
@@ -129,57 +155,27 @@ const CptModal = (props) => {
                   className="form-control"
                   id="input2"
                   min="2"
-                  placeholder={`پیشفرض : ${props.CPTModalSetting.targetPercentage}`}
+                  defaultValue={props.gonogoModalSetting.targetPercentage}
                 />
               </div>
             </div>
 
             <div className="row form-group mb-2">
-              <div className="col-md-3">
-                <label className="col-form-label mt-2"> هدف :</label>
-              </div>
-              <div className="col-md-9 ps-0">
-                <div className="row justify-content-around">
-                  <div className="form-check form-check-inline col-2 p-0">
-                    <label className="checkbox checkbox-success ms-5">
-                      <img src={fStar} className="w-50 mt-3 mb-3 mr-2 ml-3" />
-                      <input
-                        type="checkbox"
-                        name="RadioOptions1"
-                        defaultChecked={props.CPTModalSetting.targets.includes(
-                          0
-                        )}
-                      />
-                      <span className="mt-2"></span>
-                    </label>
-                  </div>
-                  <div className="form-check form-check-inline col-2 p-0">
-                    <label className="checkbox checkbox-success ms-5">
-                      <img src={hStar} className="w-50 mt-3 mb-3 mr-2 ml-3" />
-                      <input
-                        type="checkbox"
-                        name="RadioOptions1"
-                        defaultChecked={props.CPTModalSetting.targets.includes(
-                          1
-                        )}
-                      />
-                      <span className="mt-2"></span>
-                    </label>
-                  </div>
-                  <div className="form-check form-check-inline col-2 p-0">
-                    <label className="checkbox checkbox-success ms-5">
-                      <img src={eStar} className="w-50 mt-3 mb-3 mr-2 ml-3" />
-                      <input
-                        type="checkbox"
-                        name="RadioOptions1"
-                        defaultChecked={props.CPTModalSetting.targets.includes(
-                          2
-                        )}
-                      />
-                      <span className="mt-2"></span>
-                    </label>
-                  </div>
-                </div>
+              <label htmlFor="input5" className="col-auto col-form-label">
+                {" "}
+                آرایه هدف :
+              </label>
+              <div className="col ps-0">
+                <Form.Group
+                  className="mb-3"
+                  controlId="exampleForm.ControlTextarea2"
+                >
+                  <Form.Control
+                    as="textarea"
+                    rows={4}
+                    defaultValue={props.gonogoModalSetting.targets}
+                  />
+                </Form.Group>
               </div>
             </div>
             <div className="row form-group mb-2">
@@ -225,4 +221,4 @@ const CptModal = (props) => {
     </Modal>
   );
 };
-export default CptModal;
+export default GonogoModal;
