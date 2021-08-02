@@ -3,6 +3,7 @@ import { Form } from "react-bootstrap";
 import React, { useState } from "react";
 import Generate from "../../../../../../app/Generate";
 const GonogoModal = (props) => {
+      console.log(props.showModal);
   console.log(props.gonogoModalSetting);
   // debugger;
   let status = 0;

@@ -17,22 +17,21 @@ export function Routes() {
   useEffect(() => {
     console.log("Route USE EFFECT");
     initArr();
-    initArrs();
   }, []);
 
   const [scoreTable, setScoreTable] = useState([]);
   const [scoreAvailable, setScoreAvailable] = useState(false);
   console.log("Route renderd", scoreAvailable);
   const [startGame, setStartGame] = useState(false);
-  const [NBackModalSetting, setNBackModalSetting] = useState({
-    time: 3000,
-    isi: 1000,
-    numbers: 100,
-    n: 1,
-    targetPercentage: 25,
-    arr: [],
-    mode: 0,
-  });
+  const [NBackModalSetting , setNBackModalSetting] = useState({
+        time: 3000,
+        isi: 1000,
+        numbers : 100,
+        n : 1,
+        targetPercentage : 25,
+        arr: [],
+        mode: 0
+    });
   const [CPTModalSetting, setCPTModalSetting] = useState({
     time: 3000,
     isi: 1000,
@@ -41,6 +40,27 @@ export function Routes() {
     targets: [0],
     arr: [],
     mode: 0,
+  });
+  const [stroopModalSetting, setStroopModalSetting] = useState({
+    numbers: 100,
+    incongPercent: 25,
+    fixed: 5000,
+    time: 3000,
+    isi: 1000,
+    mode: 0,
+    arr: [],
+    asciiCode: [
+      { keyName: "red", codeEs: 76, codeEc: 108 },
+      { keyName: "blue", codeEs: 75, codeEc: 107 },
+      { keyName: "yellow", codeEs: 68, codeEc: 100 },
+      { keyName: "green", codeEs: 83, codeEc: 115 }
+    ],
+    colorArr: [
+      { text: "قرمز", color: "red", codeColor: "#B10D0D" },
+      { text: "زرد", color: "yellow", codeColor: "#F0E210" },
+      { text: "سبز", color: "green", codeColor: "#4CA810" },
+      { text: "آبی", color: "blue", codeColor: "#1042F0" },
+    ],
   });
   const [gonogoModalSetting, setGonogoModalSetting] = useState({
     time: 2000,

@@ -63,7 +63,7 @@ export function AsideMenuList({ layoutProps }) {
           </NavLink>
         </li>
         <li
-          className={`menu-item ${getMenuItemActive("/CPT", false)}`}
+          className={`menu-item ${getMenuItemActive("/gonogo", false)}`}
           aria-haspopup="true"
         >
           <NavLink className="menu-link" to="/gonogo">
@@ -71,6 +71,18 @@ export function AsideMenuList({ layoutProps }) {
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
             </span>
             <span className="menu-text">GO-NOGO</span>
+          </NavLink>
+        </li>
+        
+        <li
+          className={`menu-item ${getMenuItemActive("/stroop", false)}`}
+          aria-haspopup="true"
+        >
+          <NavLink className="menu-link" to="/Stroop">
+            <span className="svg-icon menu-icon">
+              <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
+            </span>
+            <span className="menu-text">Stroop</span>
           </NavLink>
         </li>
         {/* end:: section */}
