@@ -6,35 +6,28 @@ import hStar from '../../../../../../images/CPT/half-tiny-star.png'
 import fStar from '../../../../../../images/CPT/star.png'
 
 const CptModal = (props) => {
-    let CPT_obj = props.CPTModalSetting , sw = 0;
+    let CPT_obj = props.CPTModalSetting;
     let target = [];
     const [mode, setMode] = useState(0);
     const [error, setError] = useState(false);
 
     const setArray = (n, t) => {
-        let totalTargets = [0, 1, 2]
-        let none_target = totalTargets.filter(item => !CPT_obj.targets.includes(item))
-        if(none_target.length === totalTargets.length || !none_target.length)
-        {
-            sw = 1;
-            setError(true)
-            return; 
-        }
-        const generateArray = new Generate(n, t);
-        generateArray
-            .cpt(none_target, CPT_obj.targets)
-            .then((cptOut) => {
-                //debugger;
-                CPT_obj.arr = cptOut;
-                setError(false);
-            })
-            .catch((err) => {
-                //debugger;
-                CPT_obj.e = err.message
-                sw = 0;
-                setError(true)
-                console.log(err);
-            });
+        return new Promise((resolve, reject) => {
+            let totalTargets = [0, 1, 2]
+            let none_target = totalTargets.filter(item => !CPT_obj.targets.includes(item))
+            const generateArray = new Generate(n, t);
+            generateArray
+                .cpt(none_target, CPT_obj.targets)
+                .then((cptOut) => {
+                    console.log("rafte to then");
+                    resolve(cptOut);
+                })
+                .catch((err) => {
+                    console.log("rafte to catch");
+                    reject(err.message)
+
+                });
+        })
     }
     const handleMode = (event) => {
         if (event.target.id === "demo")
@@ -45,8 +38,7 @@ const CptModal = (props) => {
 
     const handleClose = () => props.setShowModal(false);
 
-    const updateSetting = (event) => {
-        sw = 0;
+    const updateSetting = async (event) => {
         event.preventDefault();
         CPT_obj = props.CPTModalSetting;
         if (parseInt(event.target[0].value) > 0)
@@ -64,17 +56,15 @@ const CptModal = (props) => {
         if (event.target[6].checked)
             target.push(2);
         CPT_obj.targets = target;
-        setArray(CPT_obj.numbers, CPT_obj.targetPercentage)
-        console.log(CPT_obj.e);
-        CPT_obj.mode = mode;
-        //debugger;
-        console.log(CPT_obj);
-        if (sw) {
-            CPT_obj = props.CPTModalSetting;
-        }
-        else {
+        try {
+            let array = await setArray(CPT_obj.numbers, CPT_obj.targetPercentage)
+            CPT_obj.arr = array;
+            CPT_obj.mode = mode;
             props.setCPTModalSetting(CPT_obj);
             props.setShowModal(false);
+            setError(false)
+        } catch (err) {
+            setError(true)
         }
     }
 
@@ -91,32 +81,31 @@ const CptModal = (props) => {
                         <div className="row form-group mb-2">
                             <label htmlFor="input1" className="col-auto col-form-label">مدت زمان نمایش (ms) :</label>
                             <div className="col ps-0">
-                                <input type="number" className="form-control" id="input3" min="20" placeholder={`پیشفرض : ${props.CPTModalSetting.time}`} />
+                                <input type="number" className="form-control" id="input3" min="20" placeholder={props.CPTModalSetting.time} defaultValue={props.CPTModalSetting.time} />
                             </div>
                         </div>
                         <div className="row form-group mb-2">
                             <label htmlFor="input2" className="col-auto col-form-label" dir="ltr">  : (ms) ISI </label>
                             <div className="col ps-0">
-                                <input type="number" className="form-control" id="input4" min="20" placeholder={`پیشفرض : ${props.CPTModalSetting.isi}`} />
+                                <input type="number" className="form-control" id="input4" min="20" placeholder={props.CPTModalSetting.isi} defaultValue={props.CPTModalSetting.isi} />
                             </div>
                         </div>
                         <div className="row form-group mb-2">
                             <label htmlFor="input3" className="col-auto col-form-label"> سایز آرایه :</label>
                             <div className="col ps-0">
-                                <input type="number" className="form-control" id="input1" min="5" placeholder={`پیشفرض : ${props.CPTModalSetting.numbers}`} />
+                                <input type="number" className="form-control" id="input1" min="5" placeholder={props.CPTModalSetting.numbers} defaultValue={props.CPTModalSetting.numbers} />
                             </div>
                         </div>
                         <div className="row form-group mb-2">
                             <label htmlFor="input4" className="col-auto col-form-label"> درصد هدف :</label>
                             <div className="col ps-0">
-                                <input type="number" className="form-control" id="input2" min="2" placeholder={`پیشفرض : ${props.CPTModalSetting.targetPercentage}`} />
+                                <input type="number" className="form-control" id="input2" min="2" placeholder={props.CPTModalSetting.targetPercentage} defaultValue={props.CPTModalSetting.targetPercentage} />
                             </div>
                         </div>
 
                         <div className="row form-group mb-2">
                             <div className="col-md-3">
                                 <label className="col-form-label mt-2">  هدف :</label>
-
                             </div>
                             <div className="col-md-9 ps-0">
                                 <div className="row justify-content-around">
@@ -164,11 +153,12 @@ const CptModal = (props) => {
                         {error ?
                             <div class="alert alert-warning alert-dismissible fade show" role="alert" dir="rtl">
                                 <strong>آرایه ای با مقادیر وارد شده ساخته نشد!</strong>
-                                {/* <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close" onClick={()=>{setError(false)}}>
                                     <span aria-hidden="true">&times;</span>
-                                </button> */}
+                                </button>
                             </div>
-                            : null}
+                            : null
+                        }
 
                     </div>
                 </Modal.Body>

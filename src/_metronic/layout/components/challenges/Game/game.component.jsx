@@ -3,21 +3,52 @@ import { useLocation } from 'react-router-dom'
 import CPT from '../CPT/CPT.component'
 import NBack from '../NBack/NBack.component'
 import CptModal from '../modals/CPT/CptModal.component'
+import NBackModal from '../modals/NBack/NBackModal.component'
 import './game.css'
 const Game = (props) => {
-    // useEffect(() => {
-    //     console.log("GAME USE EFFECT !");
-    //     return () => {
-    //         console.log("GAME UNMOUNT !");
-    //     }
-    // }, [])
-    // console.log("Game renderd");
+
     const { pathname } = useLocation();
     const currentRoute = pathname;
 
     const [showModal, setShowModal] = useState(false);
     const [startBtn, setStartBtn] = useState(0);
 
+    const switchModal = () =>{
+        switch (currentRoute) {
+            case "/NBack":
+                return(
+                    <NBackModal showModal={showModal} setShowModal={setShowModal} setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting} />
+                )
+            case "/CPT":
+                return(
+                    <CptModal showModal={showModal} setShowModal={setShowModal} setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting}/>
+                )
+            case "/gonogo":
+
+                break;
+            case "Stroop":
+
+                break;
+        }
+    }
+    const switchGame = () =>{
+        switch (currentRoute) {
+            case "/NBack":
+                return(
+                    <NBack NBack_obj={props.NBackModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
+                )
+            case "/CPT":
+                return(
+                    <CPT CPT_obj={props.CPTModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
+                )
+            case "/gonogo":
+
+                break;
+            case "Stroop":
+
+                break;
+        }
+    }
     const handleShow = () => setShowModal(true);
     const startHandler = () => {
         props.setStartGame(true);
@@ -26,7 +57,6 @@ const Game = (props) => {
 
     if (!startBtn && !props.startGame)
         return (
-
             <div className="bg-light game-modal h-100 d-flex justify-content-center align-items-center">
                 <div className="w-50 h-100 d-flex flex-column justify-content-around">
                     <div className="text-center mb-md-0 mb-3 h-25">
@@ -40,19 +70,15 @@ const Game = (props) => {
                         </button>
                     </div>
                 </div>
-                {currentRoute === '/CPT' ? <CptModal showModal={showModal} setShowModal={setShowModal} setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} /> : null}
+                {switchModal()}
             </div>
         )
-    else {
-        if (currentRoute === "/CPT")
-            return (
-                <CPT CPT_obj={props.CPTModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
-            )
-        else
-            return (
-                <NBack NBack_obj={props.NBackModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
-            )
-    }
+    else
+        return (
+            <>
+                {switchGame()}
+            </>
+        )
 }
 export default Game;
 

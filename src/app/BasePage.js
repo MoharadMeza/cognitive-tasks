@@ -5,7 +5,6 @@ import { BuilderPage } from "./pages/BuilderPage";
 import { MyPage } from "./pages/MyPage";
 import { GamePage } from "./pages/GamePage";
 import { DashboardPage } from "./pages/DashboardPage";
-import { Layout } from "../_metronic/layout";
 
 
 const GoogleMaterialPage = lazy(() =>

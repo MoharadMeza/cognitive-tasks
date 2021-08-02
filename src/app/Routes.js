@@ -15,8 +15,6 @@ import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
 import Generate from './Generate'
 
 export function Routes() {
-    let index , target;
-    let NBack_defaultArr = [];
     useEffect(()=>{
         console.log("Route USE EFFECT");
         initArr();
@@ -24,13 +22,13 @@ export function Routes() {
     
     const [scoreTable, setScoreTable] = useState([])
     const [scoreAvailable, setScoreAvailable] = useState(false);
-    console.log("Route renderd" , scoreAvailable);
     const [startGame, setStartGame] = useState(false);
     const [NBackModalSetting , setNBackModalSetting] = useState({
         time: 3000,
         isi: 1000,
-        target: 1,
-        NumberOfStimuli: 0,
+        numbers : 100,
+        n : 1,
+        targetPercentage : 25,
         arr: [],
         mode: 0
     });
@@ -44,8 +42,8 @@ export function Routes() {
         mode: 0
     });
     const initArr = ()=>{
-        const generateArray = new Generate(100 , 25);
-        generateArray
+        const CPTGenerateArray = new Generate(100 , 25);
+        CPTGenerateArray
         .cpt([1, 2], [0])
         .then((cptOut) => {
             setCPTModalSetting({...CPTModalSetting , arr : cptOut})
@@ -53,6 +51,16 @@ export function Routes() {
         .catch((err) => {
             console.log(err);
         });
+        
+        const NbackGenerateArray = new Generate(100 , 25);
+        NbackGenerateArray
+        .nback([1,2,3,4,5,6,7,8,9] , 1 , 10)
+        .then((nbackOut)=>{
+            setNBackModalSetting({...NBackModalSetting , arr : nbackOut})
+        })
+        .catch((err)=>{
+            console.log(err)
+        })
     }
     const { isAuthorized } = useSelector(
         ({ auth }) => ({
