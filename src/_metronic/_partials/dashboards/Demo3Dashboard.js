@@ -45,7 +45,7 @@ export function Demo3Dashboard() {
       <div className="row h-50 align-items-center">
         <div className="col col-6 p-10 text-center h-100">
           <Card className="mx-10 h-100" theme={theme.typography}>
-            <Link to="/NBack" className="active">
+            <Link to="/nback" className="active">
               <CardHeader
                 dir="ltr"
                 avatar={
@@ -75,7 +75,7 @@ export function Demo3Dashboard() {
         </div>
         <div className="col col-6 p-10 text-center h-100">
           <Card className="mx-10 h-100">
-            <Link to="/CPT" className="active">
+            <Link to="/cpt" className="active">
               <CardHeader
                 dir="ltr"
                 avatar={
@@ -106,7 +106,7 @@ export function Demo3Dashboard() {
       <div className="row h-50 align-items-center">
         <div className="col col-6 p-10 text-center h-100">
           <Card className="mx-10 h-100">
-            <Link to="#" className="active">
+            <Link to="/gonogo" className="active">
               <CardHeader
 
                 dir="ltr"
@@ -126,7 +126,7 @@ export function Demo3Dashboard() {
             <CardActions>
               <IconButton aria-label="info" onClick={()=>{
                 setShowModal(true);
-                setGameName('GonoGo')
+                setGameName('gonoGo')
               }}>
                 <HelpOutlineIcon />
               </IconButton>
@@ -136,7 +136,7 @@ export function Demo3Dashboard() {
         </div>
         <div className="col col-6 p-10 text-center h-100">
           <Card className="mx-10 h-100">
-            <Link to="/Stroop" className="active">
+            <Link to="/stroop" className="active">
               <CardHeader
 
                 dir="ltr"

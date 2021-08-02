@@ -44,7 +44,6 @@ const Stroop = (props) => {
     console.log(props.stroop_obj);
     window.addEventListener("keydown", handleKey);
     return () => {
-
       window.removeEventListener("keydown", handleKey);
     };
   }, []);
@@ -63,12 +62,10 @@ const Stroop = (props) => {
   const showIsi = () => {
     setSample({ p: " ", color: "black" });
     i++;
-
   }
 
   const interval = () => {
     if (i < props.stroop_obj.arr.length) {
-
       setFeedback("");
       setSample({ p: "+", color: "white" });
       timeFixed = Date.now();
@@ -126,7 +123,6 @@ const Stroop = (props) => {
           noAnswerCong++;
         }
         numberCong++;
-
       }
       else {
         if (trueFalse[j] === "T") {
@@ -139,19 +135,14 @@ const Stroop = (props) => {
           noAnswerIncong++;
         }
         numberIncong++;
-
       }
     }
     if (congTime) {
-
       avgCongTime = congTime / numberCong;
-
     }
 
     if (incongTime) {
-
       avgIncongTime = incongTime / numberIncong;
-
     }
 
 
@@ -200,13 +191,10 @@ const Stroop = (props) => {
     if (spaces[spaces.length - 1] === 0)
       if (temp - timeFixed > props.stroop_obj.fixed) {
         for (cnt = 0; cnt < asciiCode.length; cnt++) {
-
           if (props.stroop_obj.arr[timeShow.length - 1].colorName === asciiCode[cnt].keyName) {
-
             sw = true;
             break;
           }
-
         }
         if (sw) {
           temp = Date.now();
@@ -227,15 +215,9 @@ const Stroop = (props) => {
               intervalClear();
               setTimeout(() => {
                 show();
-
-
               }, toInteger(props.stroop_obj.isi))
-
             }
-
-
           }
-
           else {
             let findKey = false;
             for (let i_ascii = 0; i_ascii < asciiCode.length; i_ascii++)
@@ -264,18 +246,9 @@ const Stroop = (props) => {
                 }, props.stroop_obj.isi)
               }
             }
-
-
-
-
           }
         }
-
       }
-
-
-
-
   }
 
   if (!begin.current)
@@ -283,13 +256,13 @@ const Stroop = (props) => {
       <div className="start-game" dir="ltr">
         <h1 className="start-text display-1">
           را بزنید space برای شروع
-                </h1>
+        </h1>
       </div>
     )
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center h-100" style={{ background: 'black' }}>
       <div className="row">
-        <h1 style={{ textAlign: "center", fontSize: 100, color: `${sample.color}` }} className="samples">{sample.p}</h1>
+        <h1 style={{ textAlign: "center", fontSize: 100, color: `${sample.color}`, fontFamily: 'Shabnam' }} className="samples">{sample.p}</h1>
       </div>
       {modeGame === "D" ?
         <div className="row justify-content-center d-flex">

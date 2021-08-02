@@ -35,19 +35,26 @@ export default function BasePage(props) {
         }
 
         <ContentRoute path="/dashboard" exact component={DashboardPage} />
-        <ContentRoute path="/CPT">
+        <ContentRoute path="/cpt">
           <GamePage setStartGame={props.setStartGame} startGame={props.startGame}
            setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting}
            setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} gameName={"CPT"}
            setScoreTable={props.setScoreTable} scoreTable={props.scoreTable} setScoreAvailable={props.setScoreAvailable} scoreAvailable={props.scoreAvailable}
            />
         </ContentRoute>
-        <ContentRoute path="/NBack">
+        <ContentRoute path="/nback">
           <GamePage setStartGame={props.setStartGame} startGame={props.startGame}
            setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting}
            setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} gameName={"NBack"}
            setScoreTable={props.setScoreTable} scoreTable={props.scoreTable} setScoreAvailable={props.setScoreAvailable} scoreAvailable={props.scoreAvailable}
            />
+        </ContentRoute>
+        <ContentRoute path="/stroop">
+          <GamePage setStartGame={props.setStartGame} startGame={props.startGame}
+           setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting}
+           setStroopModalSetting={props.setStroopModalSetting} stroopModalSetting={props.stroopModalSetting} gameName={"Stroop"}
+           setScoreTable={props.setScoreTable} scoreTable={props.scoreTable} setScoreAvailable={props.setScoreAvailable} scoreAvailable={props.scoreAvailable}
+           stroop_defaultArr = {props.stroop_defaultArr}/>
         </ContentRoute>
         <ContentRoute path="/builder" component={BuilderPage} />
         <ContentRoute path="/my-page" component={MyPage} />
@@ -55,13 +62,6 @@ export default function BasePage(props) {
         <Route path="/react-bootstrap" component={ReactBootstrapPage} />
         <Route path="/e-commerce" component={ECommercePage} />
         <Route path="/user-profile" component={UserProfilepage} />
-        <ContentRoute path="/Stroop">
-          <GamePage setStartGame={props.setStartGame} startGame={props.startGame}
-           setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting}
-           setStroopModalSetting={props.setStroopModalSetting} stroopModalSetting={props.stroopModalSetting} gameName={"Stroop"}
-           setScoreTable={props.setScoreTable} scoreTable={props.scoreTable} setScoreAvailable={props.setScoreAvailable} scoreAvailable={props.scoreAvailable}
-           stroop_defaultArr = {props.stroop_defaultArr}/>
-        </ContentRoute>
         {/* <Redirect to="error/error-v1" /> */}
       </Switch>
     </Suspense>
