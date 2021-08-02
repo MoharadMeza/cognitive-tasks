@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
-import CPT from "../CPT/CPT.component";
-import NBack from "../NBack/NBack.component";
-import CptModal from ".././modals/CPT/cptModal.component";
+import React, { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom'
+import CPT from '../CPT/CPT.component'
+import NBack from '../NBack/NBack.component'
+import CptModal from '../modals/CPT/CPTModal.component'
+import StroopModal from '../modals/StroopModal/StroopModal.component'
+import Stroop from '../Stroop/Stroop.component'
 import GonogoModal from ".././modals/gonogo/gonogoModal.component";
 import Gonogo from ".././gonogo-test/gonogo.component" 
-import "./game.css";
+import './game.css'
 const Game = (props) => {
   // useEffect(() => {
   //     console.log("GAME USE EFFECT !");

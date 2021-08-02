@@ -46,7 +46,6 @@ export function Demo3Dashboard() {
             <Card className="mx-10 h-100" theme={theme.typography}>
               <Link to="/NBack" className="active">
                 <CardHeader
-
                   dir="ltr"
                   avatar={
                     <Avatar aria-label="recipe" className={classes.avatar}>
@@ -133,7 +132,7 @@ export function Demo3Dashboard() {
           </div>
           <div className="col col-6 p-10 text-center h-100">
             <Card className="mx-10 h-100">
-              <Link to="#" className="active">
+            <Link to="/Stroop" className="active">
                 <CardHeader
 
                   dir="ltr"

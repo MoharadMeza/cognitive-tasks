@@ -1,0 +1,16 @@
+.feedback{
+    font-size: xx-large;
+}
+.feedback , .start-text{
+    font-family: 'Shabnam';
+}
+@media (max-width : 767px) {
+    .samples{
+        width: 50%;
+    }  
+}
+@media (min-width : 768px){
+.samples{
+    width: 30%;
+}
+}
