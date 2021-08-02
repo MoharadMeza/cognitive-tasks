@@ -6,6 +6,7 @@ import hStar from '../../../../../../images/CPT/half-tiny-star.png'
 import fStar from '../../../../../../images/CPT/star.png'
 
 const CptModal = (props) => {
+    console.log(props.showModal);
     let CPT_obj = props.CPTModalSetting;
     let target = [];
     const [mode, setMode] = useState(0);

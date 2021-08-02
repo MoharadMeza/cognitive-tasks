@@ -41,10 +41,10 @@ export function AsideMenuList({ layoutProps }) {
         </li>
 
         <li
-          className={`menu-item ${getMenuItemActive("/nback", false)}`}
+          className={`menu-item ${getMenuItemActive("/NBack", false)}`}
           aria-haspopup="true"
         >
-          <NavLink className="menu-link" to="/nback">
+          <NavLink className="menu-link" to="/NBack">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
             </span>
@@ -52,10 +52,10 @@ export function AsideMenuList({ layoutProps }) {
           </NavLink>
         </li>
         <li
-          className={`menu-item ${getMenuItemActive("/cpt", false)}`}
+          className={`menu-item ${getMenuItemActive("/CPT", false)}`}
           aria-haspopup="true"
         >
-          <NavLink className="menu-link" to="/cpt">
+          <NavLink className="menu-link" to="/CPT">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
             </span>
@@ -67,22 +67,29 @@ export function AsideMenuList({ layoutProps }) {
         {/* Material-UI */}
         {/*begin::1 Level*/}
         <li
-          className={`menu-item ${getMenuItemActive("/gonogo", false)}`}
+          className={`menu-item menu-item-submenu ${getMenuItemActive(
+            "/google-material",
+            true
+          )}`}
           aria-haspopup="true"
+          data-menu-toggle="hover"
         >
-          <NavLink className="menu-link" to="/gonogo">
+          <NavLink className="menu-link menu-toggle" to="/dashborad/NBack">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
             </span>
-            <span className="menu-text">Go-noGO</span>
+            <span className="menu-text">NBack</span>
           </NavLink>
         </li>
-
         <li
-          className={`menu-item ${getMenuItemActive("/stroop", false)}`}
+          className={`menu-item menu-item-submenu ${getMenuItemActive(
+            "/google-material",
+            true
+          )}`}
           aria-haspopup="true"
+          data-menu-toggle="hover"
         >
-          <NavLink className="menu-link" to="/Stroop">
+          <NavLink className="menu-link menu-toggle" to="/Stroop">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
             </span>

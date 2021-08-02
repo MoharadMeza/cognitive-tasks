@@ -17,18 +17,18 @@ const Game = (props) => {
 
     const switchModal = () => {
         switch (currentRoute) {
-            case "/NBack":
+            case "/nback":
                 return (
                     <NBackModal showModal={showModal} setShowModal={setShowModal} setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting} />
                 )
-            case "/CPT":
+            case "/cpt":
                 return (
                     <CptModal showModal={showModal} setShowModal={setShowModal} setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} />
                 )
             case "/gonogo":
 
                 break;
-            case "/Stroop":
+            case "/stroop":
                 return (
                     <StroopModal showModal={showModal} setShowModal={setShowModal}
                         setStroopModalSetting={props.setStroopModalSetting}
@@ -39,22 +39,21 @@ const Game = (props) => {
     }
     const switchGame = () => {
         switch (currentRoute) {
-            case "/NBack":
+            case "/nback":
                 return (
                     <NBack NBack_obj={props.NBackModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
                 )
-            case "/CPT":
+            case "/cpt":
                 return (
                     <CPT CPT_obj={props.CPTModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
                 )
             case "/gonogo":
 
                 break;
-            case "/Stroop":
+            case "/stroop":
                 return (
                     <Stroop stroop_obj={props.stroopModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
                 )
-                break;
         }
     }
     const handleShow = () => setShowModal(true);
