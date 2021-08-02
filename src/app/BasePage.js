@@ -55,6 +55,13 @@ export default function BasePage(props) {
         <Route path="/react-bootstrap" component={ReactBootstrapPage} />
         <Route path="/e-commerce" component={ECommercePage} />
         <Route path="/user-profile" component={UserProfilepage} />
+        <ContentRoute path="/Stroop">
+          <GamePage setStartGame={props.setStartGame} startGame={props.startGame}
+           setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting}
+           setStroopModalSetting={props.setStroopModalSetting} stroopModalSetting={props.stroopModalSetting} gameName={"Stroop"}
+           setScoreTable={props.setScoreTable} scoreTable={props.scoreTable} setScoreAvailable={props.setScoreAvailable} scoreAvailable={props.scoreAvailable}
+           stroop_defaultArr = {props.stroop_defaultArr}/>
+        </ContentRoute>
         {/* <Redirect to="error/error-v1" /> */}
       </Switch>
     </Suspense>

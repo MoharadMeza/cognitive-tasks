@@ -77,7 +77,6 @@ export function Demo3Dashboard() {
           <Card className="mx-10 h-100">
             <Link to="/CPT" className="active">
               <CardHeader
-
                 dir="ltr"
                 avatar={
                   <Avatar aria-label="recipe" src={toAbsoluteUrl("/media/images/cpttest-icon.png")} />

@@ -19,7 +19,9 @@ export const GamePage = (props) => {
       {!props.scoreAvailable ?
         <Game setStartGame={props.setStartGame} startGame={props.startGame} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable}
           setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting} 
-          setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} />
+          setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting}
+          setStroopModalSetting={props.setStroopModalSetting}
+          stroopModalSetting={props.stroopModalSetting} />
         : <Score scoreTable={props.scoreTable} setScoreTable={props.setScoreTable} setStartGame={props.setStartGame} setScoreAvailable={props.setScoreAvailable}/>
       }
       {/* end::Dashboard */}

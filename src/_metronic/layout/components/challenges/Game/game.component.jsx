@@ -4,6 +4,8 @@ import CPT from '../CPT/CPT.component'
 import NBack from '../NBack/NBack.component'
 import CptModal from '../modals/CPT/CptModal.component'
 import NBackModal from '../modals/NBack/NBackModal.component'
+import StroopModal from '../modals/StroopModal/StroopModal.component'
+import Stroop from '../Stroop/Stroop.component'
 import './game.css'
 const Game = (props) => {
 
@@ -26,8 +28,11 @@ const Game = (props) => {
             case "/gonogo":
 
                 break;
-            case "Stroop":
-
+            case "/Stroop":
+                <StroopModal showModal={showModal} setShowModal={setShowModal}
+                setStroopModalSetting={props.setStroopModalSetting}
+                stroopModalSetting={props.stroopModalSetting}
+                 />
                 break;
         }
     }
@@ -44,8 +49,8 @@ const Game = (props) => {
             case "/gonogo":
 
                 break;
-            case "Stroop":
-
+            case "/Stroop":
+                    <Stroop stroop_obj={props.stroopModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
                 break;
         }
     }
