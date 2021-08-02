@@ -15,42 +15,45 @@ const Game = (props) => {
     const [showModal, setShowModal] = useState(false);
     const [startBtn, setStartBtn] = useState(0);
 
-    const switchModal = () =>{
+    const switchModal = () => {
         switch (currentRoute) {
             case "/NBack":
-                return(
+                return (
                     <NBackModal showModal={showModal} setShowModal={setShowModal} setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting} />
                 )
             case "/CPT":
-                return(
-                    <CptModal showModal={showModal} setShowModal={setShowModal} setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting}/>
+                return (
+                    <CptModal showModal={showModal} setShowModal={setShowModal} setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} />
                 )
             case "/gonogo":
 
                 break;
             case "/Stroop":
-                <StroopModal showModal={showModal} setShowModal={setShowModal}
-                setStroopModalSetting={props.setStroopModalSetting}
-                stroopModalSetting={props.stroopModalSetting}
-                 />
-                break;
+                return (
+                    <StroopModal showModal={showModal} setShowModal={setShowModal}
+                        setStroopModalSetting={props.setStroopModalSetting}
+                        stroopModalSetting={props.stroopModalSetting}
+                    />
+                )
         }
     }
-    const switchGame = () =>{
+    const switchGame = () => {
         switch (currentRoute) {
             case "/NBack":
-                return(
+                return (
                     <NBack NBack_obj={props.NBackModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
                 )
             case "/CPT":
-                return(
+                return (
                     <CPT CPT_obj={props.CPTModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
                 )
             case "/gonogo":
 
                 break;
             case "/Stroop":
+                return (
                     <Stroop stroop_obj={props.stroopModalSetting} setScoreTable={props.setScoreTable} setScoreAvailable={props.setScoreAvailable} />
+                )
                 break;
         }
     }

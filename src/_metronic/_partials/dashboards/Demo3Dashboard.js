@@ -136,7 +136,7 @@ export function Demo3Dashboard() {
         </div>
         <div className="col col-6 p-10 text-center h-100">
           <Card className="mx-10 h-100">
-            <Link to="#" className="active">
+            <Link to="/Stroop" className="active">
               <CardHeader
 
                 dir="ltr"
@@ -144,7 +144,7 @@ export function Demo3Dashboard() {
                   <Avatar aria-label="recipe" src={toAbsoluteUrl("/media/images/cpttest-icon.png")} />
                 }
                 title="رنگ ها را دنبال کن"
-                subheader="Strop"
+                subheader="Stroop"
               />
               <CardMedia
                 className={classes.media}

@@ -67,29 +67,22 @@ export function AsideMenuList({ layoutProps }) {
         {/* Material-UI */}
         {/*begin::1 Level*/}
         <li
-          className={`menu-item menu-item-submenu ${getMenuItemActive(
-            "/google-material",
-            true
-          )}`}
+          className={`menu-item ${getMenuItemActive("/gonogo", false)}`}
           aria-haspopup="true"
-          data-menu-toggle="hover"
         >
-          <NavLink className="menu-link menu-toggle" to="/dashborad/NBack">
+          <NavLink className="menu-link" to="/gonogo">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
             </span>
-            <span className="menu-text">NBack</span>
+            <span className="menu-text">Go-noGO</span>
           </NavLink>
         </li>
+
         <li
-          className={`menu-item menu-item-submenu ${getMenuItemActive(
-            "/google-material",
-            true
-          )}`}
+          className={`menu-item ${getMenuItemActive("/Stroop", false)}`}
           aria-haspopup="true"
-          data-menu-toggle="hover"
         >
-          <NavLink className="menu-link menu-toggle" to="/Stroop">
+          <NavLink className="menu-link" to="/Stroop">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
             </span>
