@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import CPT from "../CPT/CPT.component";
 import NBack from "../NBack/NBack.component";
-import CptModal from "../modals/CPT/CptModal.component";
+import CptModal from "../modals/CPT/cptModal.component";
 import NBackModal from "../modals/NBack/NBackModal.component";
 import StroopModal from "../modals/StroopModal/StroopModal.component";
 import Stroop from "../Stroop/Stroop.component";

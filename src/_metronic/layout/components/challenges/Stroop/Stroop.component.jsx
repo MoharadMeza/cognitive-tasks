@@ -41,7 +41,6 @@ const Stroop = (props) => {
   ]
 
   useEffect(() => {
-    console.log(props.stroop_obj);
     window.addEventListener("keydown", handleKey);
     return () => {
       window.removeEventListener("keydown", handleKey);
