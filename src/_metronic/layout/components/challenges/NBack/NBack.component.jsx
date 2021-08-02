@@ -1,40 +1,32 @@
 import React, { useEffect, useState, useRef } from "react";
-import Scores from '../Scores/Scores.component'
 import './NBack.css'
 
 const NBack = (props) => {
     const begin = useRef(0);
     const status = useRef(0);
-    let response = [];
+    let response = [] , arrOfNumbers = [];
     let sum = 0;
     let cnt = 0;
-    let arr = [1, 7, 7, 9, 8, 6, 3, 8, 3, 4, 6, 4, 1, 1, 9, 1, 9, 1, 1, 1, 5, 1, 9, 6, 5, 2, 5, 9, 1, 1, 1, 4, 6, 8, 6, 6, 8, 4, 5, 3, 5, 5, 5, 5, 2, 1, 8, 2, 8, 8, 8, 6, 3, 3, 4, 2, 1, 7, 7, 7, 7, 2, 8, 1, 8, 1, 7, 5, 6, 4, 8, 4, 8, 3, 5]
-    let interval, target, t, isi, numberOfStimuli, blockStartTimer, pressKey, answerTime, normalISI, counter;
-    let scoreObj = {
-        name: "NBack",
-        time: 3000,
-        isi: 1000,
-        n: 2,
-        totalNumber: 0,
-        allCorrects: 0,
-        userCorrects: 0,
-        commission: 0,
-        ommission: 0,
-        totalResponseTime: 0,
-        responseAvg: 0
-    }
-
+    let n, time, isi, intervalT, blockStartTimer, pressKey, answerTime, normalISI ;
+    let scoreObj = [
+        {name : "زمان نمایش" , value : 3000}, //0
+        {name : "ISI" , value : 1000}, //1
+        {name : "n" , value : []}, //2
+        {name : "تعداد محرک ها" , value : 0}, //3
+        {name : "کل صحیح ها" , value : 0}, //4
+        {name : "صحیح های کاربر" , value : 0}, //5
+        {name : "خطای حذف" , value : 0}, //6
+        {name : "خطای ارتکاب" , value : 0}, //7
+        {name : "زمان پاسخ کل" , value : 0}, //8
+        {name : "میانگین زمان پاسخ" , value : 0}, //9
+    ]
 
     useEffect(() => {
-        scoreObj.t = t = props.NBack_obj.time;
-        scoreObj.isi = isi = props.NBack_obj.isi;
-        scoreObj.n = target = props.NBack_obj.target;
+        scoreObj[0].value = time = props.NBack_obj.time;
+        scoreObj[1].value = isi = props.NBack_obj.isi;
+        scoreObj[2].value = n = props.NBack_obj.n;
         if (props.NBack_obj.arr.length)
-            arr = props.NBack_obj.arr;
-        if (props.NBack_obj.NumberOfStimuli === 0)
-            numberOfStimuli = arr.length;
-        else
-            numberOfStimuli = props.NBack_obj.NumberOfStimuli;
+        arrOfNumbers = props.NBack_obj.arr;
 
         window.addEventListener('keydown', eventHandler);
         return () => {
@@ -42,6 +34,7 @@ const NBack = (props) => {
         }
     }, []);
 
+    console.log(props.NBack_obj);
 
 
     const [number, setNumber] = useState(null);
@@ -78,81 +71,70 @@ const NBack = (props) => {
             }
     }
 
+    const handleInterval = ()=>{
+        intervalT = setInterval(() => {
+            status.current = 1;
+            showNum()
+        }, time + isi);
+    }
+
     const setArrayeInfo = () => {
-        scoreObj.totalNumber = numberOfStimuli;
-        for (let i = 0; i < scoreObj.totalNumber - 1; i++) {
-            if (arr[i] === arr[i + target]) {
-                scoreObj.allCorrects++;
+        scoreObj[3].value = arrOfNumbers.length;
+        for (let i = 0; i < scoreObj[3].value - 1; i++) {
+            if (arrOfNumbers[i].targetSample) {
+                scoreObj[4].value++;
             }
         }
-        scoreObj.ommission = scoreObj.allCorrects;
-        //setScore(scoreObj);
+        scoreObj[6].value = scoreObj[4].value;
     }
 
     const start = () => {
         setArrayeInfo();
-        console.log("start");
         showNum();
-        if (interval)
-            clearInterval(interval);
-        interval = setInterval(() => {
-            setFeedBack(null)
-            status.current = 1;
-            showNum()
-        }, t + isi);
+        console.log("start");
+        handleInterval();
     }
     const showNum = () => {
-        setFeedBack(null)
-        setNumber(arr[cnt])
-        console.log("show");
-        blockStartTimer = Date.now();
-        if (cnt === numberOfStimuli) {
-            clearInterval(interval);
+        if (cnt === arrOfNumbers.length) {
+            clearInterval(intervalT);
             console.log("fin");
             props.setScoreTable(scoreObj)
             props.setScoreAvailable(true);
             return;
         }
-        normalISI = setTimeout(() => {
-            setNumber(null);
-            console.log("hide");
-        }, t)
+        setFeedBack(null)
+        setNumber(arrOfNumbers[cnt].text)
+        console.log("show");
+        blockStartTimer = Date.now();
+        normalISI = setTimeout(() => {setNumber(null)}, time)
         cnt++;
     }
     const checkAnswer = () => {
         let indexNum;
-        console.log(pressKey, cnt);
-        if (pressKey && cnt > target) {
+        if (pressKey && cnt > n) {
             answerTime = pressKey - blockStartTimer;
             indexNum = cnt - 1;
-            if (arr[indexNum] === arr[indexNum - target]) {
-                console.log("true");
-                scoreObj.userCorrects++;
-                scoreObj.ommission--;
-                sum += answerTime;
-                scoreObj.totalResponseTime = sum;
-                console.log(sum);
-                console.log(answerTime);
+            if (arrOfNumbers[indexNum].targetSample) {
+                scoreObj[5].value++;
+                scoreObj[6].value--;
                 response.push(answerTime);
-                scoreObj.responseAvg = averaging();
+                sum += answerTime;
+                scoreObj[8].value = sum;
+                scoreObj[9].value = averaging();
                 setFeedBack("درست")
             }
             else {
-                console.log("false");
-                scoreObj.commission++;
+                scoreObj[7].value++;
                 setFeedBack("غلط")
             }
-            if (answerTime <= t) {
+            if (answerTime <= time) {
                 clearTimeout(normalISI);
-                clearInterval(interval);
+                clearInterval(intervalT);
                 setNumber(null)
-                setTimeout(() => {
+                normalISI = setTimeout(() => {
                     status.current = 1;
                     showNum()
-                    interval = setInterval(() => {
-                        status.current = 1;
-                        showNum()
-                    }, t + isi);
+                    handleInterval()
                 }, isi)
             }
         }

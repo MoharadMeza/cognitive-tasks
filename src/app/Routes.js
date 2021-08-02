@@ -14,8 +14,6 @@ import { Logout, AuthPage } from "./modules/Auth";
 import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
 import Generate from "./Generate";
 export function Routes() {
-  let index, target;
-  let NBack_defaultArr = [];
   useEffect(() => {
     console.log("Route USE EFFECT");
     initArr();
@@ -29,8 +27,9 @@ export function Routes() {
   const [NBackModalSetting, setNBackModalSetting] = useState({
     time: 3000,
     isi: 1000,
-    target: 1,
-    NumberOfStimuli: 0,
+    numbers: 100,
+    n: 1,
+    targetPercentage: 25,
     arr: [],
     mode: 0,
   });
@@ -51,7 +50,7 @@ export function Routes() {
     targets: "ب",
     arr: [],
     mode: 0,
-    tempArraySample: "ب|پ|ت|ث"
+    tempArraySample: "ب|پ|ت|ث",
   });
   const initArr = () => {
     const generateArray = new Generate(100, 25);
@@ -63,9 +62,22 @@ export function Routes() {
       .catch((err) => {
         console.log(err);
       });
-  };
-  const initArrs = () => {
-    const generateArray = new Generate(100, 25);
+    generateArray
+      .nback([1, 2, 3, 4, 5, 6, 7, 8, 9], 1, 10)
+      .then((nbackOut) => {
+        setNBackModalSetting({ ...NBackModalSetting, arr: nbackOut });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    generateArray
+      .stroop(stroopModalSetting.colorArr)
+      .then((stroopOut) => {
+        setStroopModalSetting({ ...stroopModalSetting, arr: stroopOut });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
     generateArray
       .gonogo(["ب", "ت", "ث"], ["پ"])
       .then((gonogoOut) => {
@@ -110,6 +122,8 @@ export function Routes() {
             CPTModalSetting={CPTModalSetting}
             setGonogoModalSetting={setGonogoModalSetting}
             gonogoModalSetting={gonogoModalSetting}
+            setStroopModalSetting={setStroopModalSetting}
+            stroopModalSetting={stroopModalSetting}
             setScoreTable={setScoreTable}
             scoreTable={scoreTable}
             setScoreAvailable={setScoreAvailable}

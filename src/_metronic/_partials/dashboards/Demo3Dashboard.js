@@ -2,8 +2,6 @@ import React, { useState } from "react";
 import { Link } from 'react-router-dom'
 import { makeStyles, createMuiTheme } from '@material-ui/core/styles';
 import { ThemeProvider } from '@material-ui/styles';
-
-import clsx from 'clsx';
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
 import CardMedia from '@material-ui/core/CardMedia';
@@ -12,7 +10,8 @@ import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
 import IconButton from '@material-ui/core/IconButton';
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
-
+import { toAbsoluteUrl } from "../../_helpers";
+import InfoModal from '../../layout/components/challenges/modals/infoModals/InfoModals.component'
 
 
 const useStyles = makeStyles((theme) => ({
@@ -23,7 +22,6 @@ const useStyles = makeStyles((theme) => ({
     height: 100,
   },
   avatar: {
-    backgroundColor: 'teal',
   },
 }));
 const theme = createMuiTheme({
@@ -35,132 +33,140 @@ const theme = createMuiTheme({
 
 
 export function Demo3Dashboard() {
+  const [showModal, setShowModal] = useState(false)
+  const [gameName , setGameName] = useState('')
+  console.log(showModal);
   const classes = useStyles();
 
 
   return (
-      <ThemeProvider theme={theme}>
-        {/* begin::Row */}
-        <div className="row h-50 align-items-center">
-          <div className="col col-6 p-10 text-center h-100">
-            <Card className="mx-10 h-100" theme={theme.typography}>
-              <Link to="/NBack" className="active">
-                <CardHeader
-                  dir="ltr"
-                  avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                      N
-                    </Avatar>
-                  }
-                  title="چنتا قبل"
-                  subheader="NBack"
-                />
-                <CardMedia
-                  theme={theme.typography}
-                  className={classes.media}
-                  image='https://via.placeholder.com/150'
-                  title="Paella dish"
-                />
-              </Link>
-              <CardActions>
-                <IconButton aria-label="info" onClick={()=>{
-                  console.log(classes.media);
-                }}>
-                  <HelpOutlineIcon />
-                </IconButton>
-              </CardActions>
-            </Card>
+    <ThemeProvider theme={theme}>
+      {/* begin::Row */}
+      <div className="row h-50 align-items-center">
+        <div className="col col-6 p-10 text-center h-100">
+          <Card className="mx-10 h-100" theme={theme.typography}>
+            <Link to="/nback" className="active">
+              <CardHeader
+                dir="ltr"
+                avatar={
+                  <Avatar aria-label="recipe" src={toAbsoluteUrl("/media/images/cpttest-icon.png")} />
+                }
+                title="چنتا قبل"
+                subheader="NBack"
+              />
+              <CardMedia
+                theme={theme.typography}
+                className={classes.media}
+                image='https://via.placeholder.com/150'
+                title="Paella dish"
+              />
+            </Link>
+            <CardActions>
+              <IconButton aria-label="info" onClick={()=>{
+                setShowModal(true);
+                setGameName('NBack')
+              }}>
+                <HelpOutlineIcon />
+              </IconButton>
+              {gameName === 'NBack' && <InfoModal showModal={showModal} setShowModal={setShowModal} gameName={gameName} />}
+            </CardActions>
+          </Card>
 
-          </div>
-          <div className="col col-6 p-10 text-center h-100">
-            <Card className="mx-10 h-100">
-              <Link to="/CPT" className="active">
-                <CardHeader
-
-                  dir="ltr"
-                  avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                      C
-                    </Avatar>
-                  }
-                  title="عملکرد پیوسته"
-                  subheader="CPT"
-                />
-                <CardMedia
-                  className={classes.media}
-                  image='https://via.placeholder.com/150'
-                  title="Paella dish"
-                />
-              </Link>
-
-              <CardActions >
-                <IconButton aria-label="info">
-                  <HelpOutlineIcon />
-                </IconButton>
-              </CardActions>
-            </Card>
-          </div>
         </div>
-        <div className="row h-50 align-items-center">
-          <div className="col col-6 p-10 text-center h-100">
-            <Card className="mx-10 h-100">
-              <Link to="/gonogo" className="active">
-                <CardHeader
+        <div className="col col-6 p-10 text-center h-100">
+          <Card className="mx-10 h-100">
+            <Link to="/cpt" className="active">
+              <CardHeader
+                dir="ltr"
+                avatar={
+                  <Avatar aria-label="recipe" src={toAbsoluteUrl("/media/images/cpttest-icon.png")} />
+                }
+                title="عملکرد پیوسته"
+                subheader="CPT"
+              />
+              <CardMedia
+                className={classes.media}
+                image='https://via.placeholder.com/150'
+                title="Paella dish"
+              />
+            </Link>
 
-                  dir="ltr"
-                  avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                      G
-                    </Avatar>
-                  }
-                  title="برونرو"
-                  subheader="Go-NoGo"
-                />
-                <CardMedia
-                  className={classes.media}
-                  image='https://via.placeholder.com/150'
-                  title="Paella dish"
-                />
-              </Link>
-
-              <CardActions>
-                <IconButton aria-label="info">
-                  <HelpOutlineIcon />
-                </IconButton>
-              </CardActions>
-            </Card>
-          </div>
-          <div className="col col-6 p-10 text-center h-100">
-            <Card className="mx-10 h-100">
-            <Link to="/Stroop" className="active">
-                <CardHeader
-
-                  dir="ltr"
-                  avatar={
-                    <Avatar aria-label="recipe" className={classes.avatar}>
-                      S
-                    </Avatar>
-                  }
-                  title="رنگ ها را دنبال کن"
-                  subheader="Strop"
-                />
-                <CardMedia
-                  className={classes.media}
-                  image='https://via.placeholder.com/150'
-                  title="Paella dish"
-                />
-              </Link>
-
-              <CardActions className="mt-auto">
-                <IconButton aria-label="info">
-                  <HelpOutlineIcon />
-                </IconButton>
-              </CardActions>
-            </Card>
-          </div>
+            <CardActions>
+              <IconButton aria-label="info" onClick={()=>{
+                setShowModal(true);
+                setGameName('CPT')
+              }}>
+                <HelpOutlineIcon />
+              </IconButton>
+              {gameName === 'CPT' && <InfoModal showModal={showModal} setShowModal={setShowModal} gameName={gameName} />}
+            </CardActions>
+          </Card>
         </div>
-        {/* end::Row */}
-      </ThemeProvider>
+      </div>
+      <div className="row h-50 align-items-center">
+        <div className="col col-6 p-10 text-center h-100">
+          <Card className="mx-10 h-100">
+            <Link to="/gonogo" className="active">
+              <CardHeader
+
+                dir="ltr"
+                avatar={
+                  <Avatar aria-label="recipe" src={toAbsoluteUrl("/media/images/cpttest-icon.png")} />
+                }
+                title="برونرو"
+                subheader="Go-NoGo"
+              />
+              <CardMedia
+                className={classes.media}
+                image='https://via.placeholder.com/150'
+                title="Paella dish"
+              />
+            </Link>
+
+            <CardActions>
+              <IconButton aria-label="info" onClick={()=>{
+                setShowModal(true);
+                setGameName('gonoGo')
+              }}>
+                <HelpOutlineIcon />
+              </IconButton>
+              {gameName === 'GonoGo' && <InfoModal showModal={showModal} setShowModal={setShowModal} gameName={gameName} />}
+            </CardActions>
+          </Card>
+        </div>
+        <div className="col col-6 p-10 text-center h-100">
+          <Card className="mx-10 h-100">
+            <Link to="/stroop" className="active">
+              <CardHeader
+
+                dir="ltr"
+                avatar={
+                  <Avatar aria-label="recipe" src={toAbsoluteUrl("/media/images/cpttest-icon.png")} />
+                }
+                title="رنگ ها را دنبال کن"
+                subheader="Stroop"
+              />
+              <CardMedia
+                className={classes.media}
+                image='https://via.placeholder.com/150'
+                title="Paella dish"
+              />
+            </Link>
+
+            <CardActions className="mt-auto">
+              <IconButton aria-label="info" onClick={()=>{
+                setShowModal(true);
+                setGameName('Stroop')
+              }}>
+                <HelpOutlineIcon />
+              </IconButton>
+              {gameName === 'Stroop' && <InfoModal showModal={showModal} setShowModal={setShowModal} gameName={gameName} />}
+            </CardActions>
+          </Card>
+        </div>
+      </div>
+      {/* end::Row */}
+    </ThemeProvider>
 
 
   );

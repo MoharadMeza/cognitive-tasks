@@ -8,7 +8,7 @@ const CPT = (props) => {
     const begin = useRef(0);
     const status = useRef(1);
 
-    let pressKey, answerTime, intervalT, blockStartTimer, sum = 0, normalISI, time, isi, target = [] , finish = 0;
+    let pressKey, answerTime, intervalT, blockStartTimer, sum = 0, normalISI, time, isi, target = [];
     let arrOfImg, response = [];
     let cnt = 0;
 
@@ -16,7 +16,7 @@ const CPT = (props) => {
         {name : "زمان نمایش" , value : 3000}, //0
         {name : "ISI" , value : 1000}, //1
         {name : "هدف" , value : []}, //2
-        {name : "تعداد شکل ها" , value : 0}, //3
+        {name : "تعداد محرک ها" , value : 0}, //3
         {name : "کل صحیح ها" , value : 0}, //4
         {name : "صحیح های کاربر" , value : 0}, //5
         {name : "خطای حذف" , value : 0}, //6
@@ -26,7 +26,6 @@ const CPT = (props) => {
         {name : "بازداری صحیح" , value : 0}
     ]
     useEffect(() => {
-        //console.log(props.CPT_obj);
         scoreObj[0].value = time = props.CPT_obj.time
         scoreObj[1].value = isi = props.CPT_obj.isi
         scoreObj[2].value = target = props.CPT_obj.targets
@@ -74,12 +73,6 @@ const CPT = (props) => {
     const [feedBack, setFeedBack] = useState(null);
 
     const handleInterval = (finish)=>{
-        if (finish) {
-            //debugger;
-            clearInterval(intervalT)
-            clearTimeout(normalISI)
-            return;
-        }
         intervalT = setInterval(() => {
             status.current = 1;
             showTime()
@@ -99,14 +92,12 @@ const CPT = (props) => {
         setScoreObjectInfo();
         showTime();
         console.log("start");
-        handleInterval(finish);
+        handleInterval();
     }
     const showTime = () => {
         if (cnt === arrOfImg.length) {
             clearInterval(intervalT);
-            //debugger;
             console.log("fin");
-            finish = 1;
             scoreObj[10].value = scoreObj[3].value - scoreObj[4].value -scoreObj[7].value
             props.setScoreTable(scoreObj)
             props.setScoreAvailable(true);
@@ -153,7 +144,7 @@ const CPT = (props) => {
                 normalISI = setTimeout(() => {
                     status.current = 1;
                     showTime();
-                    handleInterval(finish);
+                    handleInterval();
                 }, isi)
             }
         }
