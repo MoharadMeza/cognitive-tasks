@@ -50,10 +50,10 @@ export function Routes() {
     mode: 0,
     arr: [],
     asciiCode: [
-      { keyName: "red", codeEs: 76, codeEc: 108 },
-      { keyName: "blue", codeEs: 75, codeEc: 107 },
-      { keyName: "yellow", codeEs: 68, codeEc: 100 },
-      { keyName: "green", codeEs: 83, codeEc: 115 }
+      { keyName: "red", codeEc: 76, codeEs: 108 },
+      { keyName: "blue", codeEc: 75, codeEs: 107 },
+      { keyName: "yellow", codeEc: 68, codeEs: 100 },
+      { keyName: "green", codeEc: 83, codeEs: 115 }
     ],
     colorArr: [
       { text: "قرمز", color: "red", codeColor: "#B10D0D" },
