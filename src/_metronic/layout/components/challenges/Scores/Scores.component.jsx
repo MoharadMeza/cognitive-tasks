@@ -11,7 +11,6 @@ const Scores = (props) => {
     const currentRoute = pathname;
     useEffect(() => {
         console.log("Score USE EFFECT");
-        props.setStartGame(false);
         return () => {
             console.log("Score Unmount");
         }
@@ -36,7 +35,7 @@ const Scores = (props) => {
                         <tbody>
                             {
                                 props.scoreTable.map((item, index) => {
-                                    if (currentRoute === "/CPT" && index === 2) {
+                                    if (index === 2 && currentRoute === "/cpt") {
                                         return (
                                             <tr>
                                                 <td>{convertTargets(item.value).join(" , ")}</td>

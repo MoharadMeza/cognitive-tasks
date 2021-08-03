@@ -86,13 +86,13 @@ const NBackModal = (props) => {
                         <div className="row form-group mb-2">
                             <label htmlFor="input3" className="col-auto col-form-label"> سایز آرایه :</label>
                             <div className="col ps-0">
-                                <input type="number" className="form-control" id="input3" min="5" placeholder={props.NBackModalSetting.numbers} defaultValue={props.NBackModalSetting.numbers} />
+                                <input type="number" className="form-control" id="input3" min="10" placeholder={props.NBackModalSetting.numbers} defaultValue={props.NBackModalSetting.numbers} />
                             </div>
                         </div>
                         <div className="row form-group mb-2">
                             <label htmlFor="input4" className="col-auto col-form-label"> درصد هدف :</label>
                             <div className="col ps-0">
-                                <input type="number" className="form-control" id="input4" min="" placeholder={props.NBackModalSetting.targetPercentage} defaultValue={props.NBackModalSetting.targetPercentage} />
+                                <input type="number" className="form-control" id="input4" min="1" max="60" placeholder={props.NBackModalSetting.targetPercentage} defaultValue={props.NBackModalSetting.targetPercentage} />
                             </div>
                         </div>
                         <div className="row form-group mb-2">

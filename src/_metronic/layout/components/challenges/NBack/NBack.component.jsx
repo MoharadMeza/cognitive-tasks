@@ -30,6 +30,7 @@ const NBack = (props) => {
 
         window.addEventListener('keydown', eventHandler);
         return () => {
+            props.setStartGame(false)
             window.removeEventListener('keydown', eventHandler)
         }
     }, []);

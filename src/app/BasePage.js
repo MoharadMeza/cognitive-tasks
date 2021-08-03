@@ -23,6 +23,7 @@ const UserProfilepage = lazy(() =>
 export default function BasePage(props) {
   console.log("BasePage rendered" , props.scoreAvailable);
   useEffect(() => {
+    console.log(props.gonogoModalSetting.arr);
     console.log('BasePage USE EFFECT');
   }, []) // [] - is required if you need only one call
   // https://reactjs.org/docs/hooks-reference.html#useeffect
@@ -42,7 +43,7 @@ export default function BasePage(props) {
            setScoreTable={props.setScoreTable} scoreTable={props.scoreTable} setScoreAvailable={props.setScoreAvailable} scoreAvailable={props.scoreAvailable}
            />
         </ContentRoute>
-        <ContentRoute path="/nback">
+        <ContentRoute path="/n-back">
           <GamePage setStartGame={props.setStartGame} startGame={props.startGame}
            setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting}
            setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} gameName={"NBack"}
@@ -55,6 +56,14 @@ export default function BasePage(props) {
            setStroopModalSetting={props.setStroopModalSetting} stroopModalSetting={props.stroopModalSetting} gameName={"Stroop"}
            setScoreTable={props.setScoreTable} scoreTable={props.scoreTable} setScoreAvailable={props.setScoreAvailable} scoreAvailable={props.scoreAvailable}
            stroop_defaultArr = {props.stroop_defaultArr}/>
+        </ContentRoute>
+        <ContentRoute path="/go-nogo">
+          <GamePage setStartGame={props.setStartGame} startGame={props.startGame}
+           setNBackModalSetting={props.setNBackModalSetting} NBackModalSetting={props.NBackModalSetting}
+           setCPTModalSetting={props.setCPTModalSetting} CPTModalSetting={props.CPTModalSetting} gameName={"gonogo"}
+           setGonogoModalSetting={props.setGonogoModalSetting} gonogoModalSetting={props.gonogoModalSetting}
+           setScoreTable={props.setScoreTable} scoreTable={props.scoreTable} setScoreAvailable={props.setScoreAvailable} scoreAvailable={props.scoreAvailable}
+           />
         </ContentRoute>
         <ContentRoute path="/builder" component={BuilderPage} />
         <ContentRoute path="/my-page" component={MyPage} />

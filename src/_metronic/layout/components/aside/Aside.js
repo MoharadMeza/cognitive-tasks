@@ -56,6 +56,7 @@ export function Aside() {
     tabId1: "kt_aside_tab_1",
     tabId2: "kt_aside_tab_2",
   };
+  const [asideTooltipText , setAsideTooltipText] = useState(true)
   const [activeTab, setActiveTab] = useState(tabs.tabId2);
   const handleTabChange = (id) => {
     setActiveTab(id);
@@ -132,9 +133,10 @@ export function Aside() {
                   <OverlayTrigger
                     show={false}
                     placement="left"
-                    overlay={<Tooltip id="toggle-aside"> close </Tooltip>}
+                    overlay={<Tooltip id="toggle-aside" style={{fontFamily : 'Shabnam'}}> {asideTooltipText ? "بستن" : "بازکردن"} </Tooltip>}
                   >
                     <span
+                      onClick={()=>setAsideTooltipText(!asideTooltipText)}
                       className="aside-toggle btn btn-icon btn-primary btn-hover-primary shadow-sm"
                       id="kt_aside_toggle"
                     >

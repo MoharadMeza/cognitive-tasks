@@ -26,85 +26,66 @@ export function AsideMenuList({ layoutProps }) {
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Layers.svg")} />
             </span>
-            <span className="menu-text" style={{fontFamily:'Shabnam'}}>داشبورد</span>
+            <span className="menu-text" style={{ fontFamily: "Shabnam" }}>
+              داشبورد
+            </span>
           </NavLink>
         </li>
         {/*end::1 Level*/}
-
-
 
         {/* Components */}
         {/* begin::section */}
         <li className="menu-section ">
-          <h3 style={{ fontFamily: 'Shabnam' }}> آزمون ها</h3>
+          <h3 style={{ fontFamily: "Shabnam" }}> آزمون ها</h3>
           <i className="menu-icon flaticon-more-v2"></i>
         </li>
 
         <li
-          className={`menu-item ${getMenuItemActive("/NBack", false)}`}
+          className={`menu-item ${getMenuItemActive("/n-back", false)}`}
           aria-haspopup="true"
         >
-          <NavLink className="menu-link" to="/NBack">
+          <NavLink className="menu-link" to="/n-back">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
             </span>
-            <span className="menu-text">NBack</span>
+            <span className="menu-text" style={{fontFamily:'Shabnam'}}>NBack (چنتا قبل)</span>
           </NavLink>
         </li>
         <li
-          className={`menu-item ${getMenuItemActive("/CPT", false)}`}
+          className={`menu-item ${getMenuItemActive("/cpt", false)}`}
           aria-haspopup="true"
         >
-          <NavLink className="menu-link" to="/CPT">
+          <NavLink className="menu-link" to="/cpt">
             <span className="svg-icon menu-icon">
               <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
             </span>
-            <span className="menu-text">CPT</span>
+            <span className="menu-text" style={{fontFamily:'Shabnam'}}>CPT (عملکرد پیوسته)</span>
+          </NavLink>
+        </li>
+        <li
+          className={`menu-item ${getMenuItemActive("/go-nogo", false)}`}
+          aria-haspopup="true"
+        >
+          <NavLink className="menu-link" to="/go-nogo">
+            <span className="svg-icon menu-icon">
+              <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
+            </span>
+            <span className="menu-text" style={{fontFamily:'Shabnam'}}>GO-NOGO (برونرو)</span>
+          </NavLink>
+        </li>
+        
+        <li
+          className={`menu-item ${getMenuItemActive("/stroop", false)}`}
+          aria-haspopup="true"
+        >
+          <NavLink className="menu-link" to="/stroop">
+            <span className="svg-icon menu-icon">
+              <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
+            </span>
+            <span className="menu-text" style={{fontFamily:'Shabnam'}}>Stroop (رنگ هارا دنبال کن)</span>
           </NavLink>
         </li>
         {/* end:: section */}
-
-        {/* Material-UI */}
-        {/*begin::1 Level*/}
-        <li
-          className={`menu-item menu-item-submenu ${getMenuItemActive(
-            "/google-material",
-            true
-          )}`}
-          aria-haspopup="true"
-          data-menu-toggle="hover"
-        >
-          <NavLink className="menu-link menu-toggle" to="/dashborad/NBack">
-            <span className="svg-icon menu-icon">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
-            </span>
-            <span className="menu-text">NBack</span>
-          </NavLink>
-        </li>
-        <li
-          className={`menu-item menu-item-submenu ${getMenuItemActive(
-            "/google-material",
-            true
-          )}`}
-          aria-haspopup="true"
-          data-menu-toggle="hover"
-        >
-          <NavLink className="menu-link menu-toggle" to="/Stroop">
-            <span className="svg-icon menu-icon">
-              <SVG src={toAbsoluteUrl("/media/svg/icons/Design/Cap-2.svg")} />
-            </span>
-            <span className="menu-text">Stroop</span>
-          </NavLink>
-        </li>
-        {/* ////////////////////////////// */}
-        {/* /////////////////////////////// */}
-
-
-
-        {/*end::1 Level*/}
-
-
-        {/*end::1 Level*/}
       </ul>
 
       {/* end::Menu Nav */}

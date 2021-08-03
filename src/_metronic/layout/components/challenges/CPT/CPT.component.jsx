@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
 import './cpt.css'
-
 import eStar from '../../../../../images/CPT/empty-star.png'
 import hStar from '../../../../../images/CPT/half-tiny-star.png'
 import fStar from '../../../../../images/CPT/star.png'
@@ -33,10 +32,10 @@ const CPT = (props) => {
         if (props.CPT_obj.arr.length)
             arrOfImg = props.CPT_obj.arr;
         window.addEventListener('keydown', eventHandler);
-        console.log("CPT USE EFFECT");
         return () => {
-            console.log("CPT Unmount");
             window.removeEventListener('keydown', eventHandler)
+            props.setStartGame(false)
+            
         }
     }, []);
     console.log("CPT renderd");
@@ -73,7 +72,7 @@ const CPT = (props) => {
     const [Img, setImg] = useState(null);
     const [feedBack, setFeedBack] = useState(null);
 
-    const handleInterval = (finish)=>{
+    const handleInterval = ()=>{
         intervalT = setInterval(() => {
             status.current = 1;
             showTime()

@@ -45,6 +45,7 @@ const Stroop = (props) => {
     window.addEventListener("keydown", handleKey);
     return () => {
       window.removeEventListener("keydown", handleKey);
+      props.setStartGame(false)
     };
   }, []);
 

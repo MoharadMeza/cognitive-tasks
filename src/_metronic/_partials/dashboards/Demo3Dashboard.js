@@ -19,9 +19,8 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: '100%',
   },
   media: {
-    height: 100,
-  },
-  avatar: {
+    height: 0,
+    paddingTop: '56.25%',
   },
 }));
 const theme = createMuiTheme({
@@ -44,8 +43,8 @@ export function Demo3Dashboard() {
       {/* begin::Row */}
       <div className="row h-50 align-items-center">
         <div className="col col-6 p-10 text-center h-100">
-          <Card className="mx-10 h-100" theme={theme.typography}>
-            <Link to="/nback" className="active">
+          <Card className="mx-10 h-100">
+            <Link to="/n-back" className="active">
               <CardHeader
                 dir="ltr"
                 avatar={
@@ -55,13 +54,12 @@ export function Demo3Dashboard() {
                 subheader="NBack"
               />
               <CardMedia
-                theme={theme.typography}
                 className={classes.media}
                 image='https://via.placeholder.com/150'
                 title="Paella dish"
               />
             </Link>
-            <CardActions>
+            <CardActions className={classes.cardActions}>
               <IconButton aria-label="info" onClick={()=>{
                 setShowModal(true);
                 setGameName('NBack')
@@ -106,7 +104,7 @@ export function Demo3Dashboard() {
       <div className="row h-50 align-items-center">
         <div className="col col-6 p-10 text-center h-100">
           <Card className="mx-10 h-100">
-            <Link to="/gonogo" className="active">
+            <Link to="/go-nogo" className="active">
               <CardHeader
 
                 dir="ltr"
@@ -126,7 +124,7 @@ export function Demo3Dashboard() {
             <CardActions>
               <IconButton aria-label="info" onClick={()=>{
                 setShowModal(true);
-                setGameName('gonoGo')
+                setGameName('GonoGo')
               }}>
                 <HelpOutlineIcon />
               </IconButton>

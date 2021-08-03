@@ -13,7 +13,6 @@ import BasePage from "./BasePage";
 import { Logout, AuthPage } from "./modules/Auth";
 import ErrorsPage from "./modules/ErrorsExamples/ErrorsPage";
 import Generate from "./Generate";
-
 export function Routes() {
   useEffect(() => {
     console.log("Route USE EFFECT");
@@ -63,6 +62,16 @@ export function Routes() {
       { text: "آبی", color: "blue", codeColor: "#1042F0" },
     ],
   });
+  const [gonogoModalSetting, setGonogoModalSetting] = useState({
+    time: 2000,
+    isi: 1000,
+    numbers: 100,
+    targetPercentage: 25,
+    targets: "ب",
+    arr: [],
+    mode: 0,
+    tempArraySample: "ب|پ|ت|ث",
+  });
   const initArr = () => {
     const generateArray = new Generate(100, 25);
     generateArray
@@ -74,17 +83,25 @@ export function Routes() {
         console.log(err);
       });
     generateArray
-      .nback([1,2,3,4,5,6,7,8,9] , 1 , 10)
-      .then((nbackOut)=>{
-          setNBackModalSetting({...NBackModalSetting , arr : nbackOut})
+      .nback([1, 2, 3, 4, 5, 6, 7, 8, 9], 1, 10)
+      .then((nbackOut) => {
+        setNBackModalSetting({ ...NBackModalSetting, arr: nbackOut });
       })
-      .catch((err)=>{
-          console.log(err)
-      })
+      .catch((err) => {
+        console.log(err);
+      });
     generateArray
       .stroop(stroopModalSetting.colorArr)
       .then((stroopOut) => {
         setStroopModalSetting({ ...stroopModalSetting, arr: stroopOut });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    generateArray
+      .gonogo(["ب", "ت", "ث"], ["پ"])
+      .then((gonogoOut) => {
+        setGonogoModalSetting({ ...gonogoModalSetting, arr: gonogoOut });
       })
       .catch((err) => {
         console.log(err);
@@ -123,6 +140,8 @@ export function Routes() {
             NBackModalSetting={NBackModalSetting}
             setCPTModalSetting={setCPTModalSetting}
             CPTModalSetting={CPTModalSetting}
+            setGonogoModalSetting={setGonogoModalSetting}
+            gonogoModalSetting={gonogoModalSetting}
             setStroopModalSetting={setStroopModalSetting}
             stroopModalSetting={stroopModalSetting}
             setScoreTable={setScoreTable}
