@@ -148,7 +148,7 @@ const NBack = (props) => {
     if (!begin.current)
         return (
             <div className="start-game" dir="ltr">
-                <h1 className="start-text display-1">
+                <h1 className="start-text display-1 text-center">
                     را بزنید space برای شروع
                 </h1>
                 <div className="d-flex mobile-space d-md-none justify-content-center mt-5">

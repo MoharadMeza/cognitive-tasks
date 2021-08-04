@@ -1,7 +1,4 @@
 
-.feedback{
-    font-size: xx-large;
-}
 .feedback , .start-text{
     font-family: 'Shabnam';
 }
@@ -14,4 +11,12 @@
 .stars{
     width: 30%;
 }
+}
+.stars{
+    font-size: 12rem;
+    height: 200px;
+}
+.feedback{
+    font-size: xx-large;
+    height: 100px;
 }

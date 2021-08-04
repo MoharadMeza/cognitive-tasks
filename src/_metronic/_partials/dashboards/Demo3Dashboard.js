@@ -42,7 +42,7 @@ export function Demo3Dashboard() {
     <ThemeProvider theme={theme}>
       {/* begin::Row */}
       <div className="row h-50 align-items-center">
-        <div className="col col-6 p-10 text-center h-100">
+        <div className="col col-md-6 col-sm-12 p-10 text-center">
           <Card className="mx-10 h-100">
             <Link to="/n-back" className="active">
               <CardHeader
@@ -71,7 +71,7 @@ export function Demo3Dashboard() {
           </Card>
 
         </div>
-        <div className="col col-6 p-10 text-center h-100">
+        <div className="col col-md-6 col-sm-12 p-10 text-center">
           <Card className="mx-10 h-100">
             <Link to="/cpt" className="active">
               <CardHeader
@@ -102,7 +102,7 @@ export function Demo3Dashboard() {
         </div>
       </div>
       <div className="row h-50 align-items-center">
-        <div className="col col-6 p-10 text-center h-100">
+        <div className="col col-md-6 col-sm-12 p-10 text-center">
           <Card className="mx-10 h-100">
             <Link to="/go-nogo" className="active">
               <CardHeader
@@ -132,7 +132,7 @@ export function Demo3Dashboard() {
             </CardActions>
           </Card>
         </div>
-        <div className="col col-6 p-10 text-center h-100">
+        <div className="col col-md-6 col-sm-12 p-10 text-center">
           <Card className="mx-10 h-100">
             <Link to="/stroop" className="active">
               <CardHeader
