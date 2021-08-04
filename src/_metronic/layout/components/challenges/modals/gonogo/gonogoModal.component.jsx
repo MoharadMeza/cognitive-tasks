@@ -3,8 +3,6 @@ import { Form } from "react-bootstrap";
 import React, { useState } from "react";
 import Generate from "../../../../../../app/Generate";
 const GonogoModal = (props) => {
-      console.log(props.showModal);
-  console.log(props.gonogoModalSetting);
   let status = 0;
   let gonogo_obj = props.gonogoModalSetting;
 
@@ -41,7 +39,6 @@ const GonogoModal = (props) => {
       let tempGonogoArr = [];
       tempGonogoArr = event.target[0].value.split("|");
       gonogo_obj.arr = tempGonogoArr;
-      console.log(tempGonogoArr);
     }
     if (parseInt(event.target[1].value) > 0)
       gonogo_obj.time = parseInt(event.target[1].value);
@@ -59,7 +56,6 @@ const GonogoModal = (props) => {
     setArray(gonogo_obj.numbers, gonogo_obj.targetPercentage);
     gonogo_obj.mode = mode;
     if (status) {
-      console.log(error);
       gonogo_obj = {};
       return;
     }

@@ -36,7 +36,6 @@ const NBackModal = (props) => {
         event.preventDefault();
         NBack_obj = props.NBackModalSetting;
         NBack_obj.time = 10;
-        console.log(event.target[0]);
         if (parseInt(event.target[0].value) > 0)
             NBack_obj.time = parseInt(event.target[0].value);
         if (parseInt(event.target[1].value) >= 0)
@@ -49,14 +48,12 @@ const NBackModal = (props) => {
             NBack_obj.n = parseInt(event.target[4].value);
         try {
             let array = await setArray(NBack_obj.numbers, NBack_obj.targetPercentage)
-            console.log(array);
             NBack_obj.arr = array;
             NBack_obj.mode = mode;
             props.setNBackModalSetting(NBack_obj);
             props.setShowModal(false);
             setError("")
         } catch (err) {
-            console.log(err)
             setError(err)
         }
     }
