@@ -6,7 +6,7 @@ import NBack from "../NBack/NBack.component";
 import NBackModal from "../modals/NBack/NBackModal.component";
 import StroopModal from "../modals/Stroop/StroopModal.component";
 import Stroop from "../Stroop/Stroop.component";
-import GonogoModal from "../modals/GonoGo/gonogoModal.component";
+import GonogoModal from "../modals/gonogo/gonogoModal.component";
 import Gonogo from "../GonoGo/gonogo.component";
 import "./game.css";
 const Game = (props) => {
