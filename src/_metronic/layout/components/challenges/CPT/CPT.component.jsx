@@ -169,7 +169,7 @@ const CPT = (props) => {
     return (
         <div className="container">
             <div className={`row justify-content-center d-flex ${!Img ? "d-none" : ""}`}>
-                <img src={Img} className="stars" />
+                {Img ? <img src={Img} className="stars" /> : null}
             </div>
             {!props.CPT_obj.mode ?
                 <div className="row justify-content-center d-flex">
