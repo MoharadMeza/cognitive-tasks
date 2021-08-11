@@ -2,10 +2,10 @@ import { Modal } from "react-bootstrap";
 import { Form } from "react-bootstrap";
 import React, { useState } from "react";
 import Generate from "../../../../../../app/Generate";
+
 const GonogoModal = (props) => {
   let status = 0;
   let gonogo_obj = props.gonogoModalSetting;
-
   const [mode, setMode] = useState(0);
   const [error, setError] = useState("");
   const handleClose = () => props.setShowModal(false);
