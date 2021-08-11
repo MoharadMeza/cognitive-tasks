@@ -42,7 +42,7 @@ export function Demo3Dashboard() {
     <ThemeProvider theme={theme}>
       {/* begin::Row */}
       <div className="row h-50 align-items-center">
-        <div className="col col-md-6 col-sm-12 p-10 text-center">
+        <div className="col-md-6 col-sm-12 p-10 text-center">
           <Card className="mx-10 h-100">
             <Link to="/n-back" className="active">
               <CardHeader
